@@ -5,27 +5,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#df83ad">
+<meta name="description" content="Una noche especial, un sueño y un recuerdo. Te invito a celebrar mis XV años, el 19 de diciembre de 2026.">
 
-<!-- Vista previa al compartir -->
-<meta property="og:title" content="Los XV de Delfina ✨">
-<meta property="og:description" content="Una noche especial, un sueño y un recuerdo para siempre. Te invito a celebrar conmigo.">
-<meta property="og:image" content="https://azarate210-rgb.github.io/Delfina-xv/miniatura-xv.png">
+<!-- Vista previa al compartir el enlace (WhatsApp, etc.) -->
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://azarate210-rgb.github.io/Delfina-xv/">
+<meta property="og:title" content="Los XV de Delfina ✨">
+<meta property="og:description" content="Una noche especial, un sueño y un recuerdo. ¡Te invito a celebrar conmigo!">
+<meta property="og:url" content="https://lexium210.github.io/Delfina-xv/">
+<meta property="og:image" content="https://lexium210.github.io/Delfina-xv/fotos/delfina-01.jpeg">
+<meta property="og:image:alt" content="Delfina, invitación a sus XV años">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Los XV de Delfina ✨">
+<meta name="twitter:description" content="Una noche especial, un sueño y un recuerdo. ¡Te invito a celebrar conmigo!">
+<meta name="twitter:image" content="https://lexium210.github.io/Delfina-xv/fotos/delfina-01.jpeg">
 
-<!-- Evitar restauración de scroll y fragmentos de enlace al abrir la página -->
+<title>Delfina | Mis XV</title>
+
 <script>
+  // Evita restaurar posiciones de scroll y abrir desde un ancla.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   if (window.location.hash) {
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }
-  window.addEventListener('pageshow', function () {
-    window.scrollTo(0, 0);
-  });
+  window.addEventListener('load', function () { window.scrollTo(0, 0); });
+  window.addEventListener('pageshow', function () { window.scrollTo(0, 0); });
 </script>
-
-<title>Delfina | Mis XV</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
@@ -1491,6 +1495,38 @@ footer p {
 </section>
 
 <!-- ==========================================
+     CÓDIGO DE VESTIMENTA
+========================================== -->
+
+<section class="dress-code">
+
+  <p class="intro" style="color:#c47da2">
+    Para acompañar esta noche
+  </p>
+
+  <h2 class="section-title">
+    Código de vestimenta
+  </h2>
+
+  <div class="gold-divider">
+    <span>✧</span>
+  </div>
+
+  <div class="gold-ornament">
+    ♡
+  </div>
+
+  <p class="text">
+    La celebración nos invita a vestir con elegancia y comodidad,
+    bajo un estilo <strong>elegant sport</strong>. Para preservar la armonía
+    de la noche y el encanto de sus colores, les pedimos amablemente
+    evitar prendas en tonos <strong>azules, blancos o rosados</strong>.
+    ¡Gracias por acompañarnos y ser parte de este recuerdo tan especial!
+  </p>
+
+</section>
+
+<!-- ==========================================
      REGALO
 ========================================== -->
 
@@ -1788,7 +1824,7 @@ form.addEventListener("submit", async (event) => {
 
 const giftButton = document.getElementById("giftButton");
 const giftStatus = document.getElementById("giftStatus");
-const giftAlias = "juramento.radiante";
+const giftAlias = "delfi.xxc";
 
 giftButton.addEventListener("click", async () => {
   try {
