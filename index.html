@@ -1055,67 +1055,25 @@ textarea {
     );
 }
 
-.gallery-photos {
-  max-width: 950px;
+ .gallery-grid {
+  max-width: 900px;
   margin: 35px auto;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
-
 .gallery-photo {
-  overflow: hidden;
-  border-radius: 22px;
-  border: 1px solid rgba(212,175,55,.55);
-  background: #fffafd;
-  padding: 8px;
-  box-shadow: 0 10px 28px rgba(190,130,165,.12);
-}
-
-
-.gallery-photo img {
-  display: block;
   width: 100%;
   aspect-ratio: 3 / 4;
   object-fit: cover;
-  border-radius: 16px;
-  transition: transform .6s ease;
+  border-radius: 22px;
+  border: 1px solid #e7c5d9;
+  box-shadow: 0 10px 30px rgba(190,130,165,.12);
 }
-
-
-.gallery-photo:hover img {
-  transform: scale(1.04);
-}
-
-
 @media (max-width: 600px) {
-  .gallery-photos {
-    grid-template-columns: 1fr;
-    max-width: 420px;
-    gap: 16px;
-  }
+  .gallery-grid { grid-template-columns: 1fr; max-width: 420px; }
+  .gallery-photo { aspect-ratio: 4 / 5; }
 }
-
-
-.gift-alias {
-  margin-top: 18px;
-  font-size: 15px;
-  letter-spacing: 1px;
-  color: var(--pink-deep);
-  font-weight: 600;
-}
-.gift-button + .gift-button {
-  margin-top: 12px;
-}
-
-.gift-feedback {
-  min-height: 24px;
-  margin-top: 14px;
-  font-size: 12px;
-  line-height: 1.7;
-  color: #bd7099;
-}
-
 
 .gallery-ending {
   margin-top: 50px;
@@ -1541,26 +1499,14 @@ footer p {
       podés hacerlo desde acá.
     </p>
 
-    <p class="gift-alias">Alias: juramento.radiante</p>
-
     <button
       type="button"
       class="gift-button"
-      id="copyAliasButton"
+      id="giftButton"
     >
       ♡ COPIAR ALIAS ♡
     </button>
-
-
-    <button
-      type="button"
-      class="gift-button"
-      id="openMercadoPagoButton"
-    >
-      ♡ ABRIR MERCADO PAGO ♡
-    </button>
-
-    <p class="gift-feedback" id="giftFeedback" aria-live="polite"></p>
+    <p id="giftStatus" aria-live="polite" style="margin-top:18px;font-size:12px;line-height:1.7;"></p>
 
   </div>
 
@@ -1584,16 +1530,10 @@ footer p {
     ✧ ♡ ✧
   </div>
 
-  <div class="gallery-photos">
-    <div class="gallery-photo">
-      <img src="fotos/delfina-01.jpeg" alt="Delfina, recuerdo 1" loading="lazy">
-    </div>
-    <div class="gallery-photo">
-      <img src="fotos/delfina-02.jpeg" alt="Delfina, recuerdo 2" loading="lazy">
-    </div>
-    <div class="gallery-photo">
-      <img src="fotos/delfina-03.jpeg" alt="Delfina, recuerdo 3" loading="lazy">
-    </div>
+  <div class="gallery-grid">
+    <img class="gallery-photo" src="fotos/delfina-01.jpeg" alt="Recuerdo de Delfina 1">
+    <img class="gallery-photo" src="fotos/delfina-02.jpeg" alt="Recuerdo de Delfina 2">
+    <img class="gallery-photo" src="fotos/delfina-03.jpeg" alt="Recuerdo de Delfina 3">
   </div>
 
   <div class="gold-divider">
@@ -1680,6 +1620,21 @@ footer p {
   }
 
 })();
+
+
+/* ==========================================
+   MÚSICA DE FONDO
+========================================== */
+
+const backgroundMusic = document.getElementById("backgroundMusic");
+const invitationOpenButton = document.querySelector('.hero .button[href="#invitacion"]');
+
+invitationOpenButton.addEventListener("click", () => {
+  backgroundMusic.volume = 0.65;
+  backgroundMusic.play().catch(() => {
+    // Si el navegador bloquea la reproducción, no interrumpe la apertura de la invitación.
+  });
+});
 
 
 /* ==========================================
@@ -1812,37 +1767,29 @@ form.addEventListener("submit", async (event) => {
    REGALO
 ========================================== */
 
-document.getElementById("copyAliasButton").addEventListener("click", async () => {
-  const alias = "juramento.radiante";
-  const feedback = document.getElementById("giftFeedback");
+const giftButton = document.getElementById("giftButton");
+const giftStatus = document.getElementById("giftStatus");
+const giftAlias = "juramento.radiante";
+
+giftButton.addEventListener("click", async () => {
   try {
-    await navigator.clipboard.writeText(alias);
-    feedback.textContent = "Alias copiado ♡ Gracias por tu cariño y por acompañarme en este día tan especial.";
+    await navigator.clipboard.writeText(giftAlias);
+    giftStatus.textContent = "¡Alias copiado! Gracias por tu cariño ♡";
   } catch (error) {
-    feedback.textContent = "Mi alias es juramento.radiante ♡ Gracias por tu cariño.";
+    // Fallback para navegadores que no permiten Clipboard API.
+    const temporaryInput = document.createElement("textarea");
+    temporaryInput.value = giftAlias;
+    temporaryInput.setAttribute("readonly", "");
+    temporaryInput.style.position = "fixed";
+    temporaryInput.style.opacity = "0";
+    document.body.appendChild(temporaryInput);
+    temporaryInput.select();
+    const copied = document.execCommand("copy");
+    temporaryInput.remove();
+    giftStatus.textContent = copied
+      ? "¡Alias copiado! Gracias por tu cariño ♡"
+      : "No pudimos copiarlo. Alias: " + giftAlias;
   }
-});
-
-
-/* Botón independiente: intenta invocar la app Android Mercado Pago
-   mediante URI Intent con scheme mercadopago y package de la app. */
-document.getElementById("openMercadoPagoButton").addEventListener("click", () => {
-  const mpIntent = "intent://open/#Intent;scheme=mercadopago;package=com.mercadopago.wallet;end";
-  window.location.href = mpIntent;
-});
-
-
-/* ==========================================
-   MÚSICA DE FONDO
-========================================== */
-
-const backgroundMusic = document.getElementById("backgroundMusic");
-
-/* La música comienza cuando se abre la invitación. */
-document.querySelector('a[href="#invitacion"]').addEventListener("click", () => {
-  backgroundMusic.play().catch(() => {
-    // El navegador puede bloquear el audio; no se muestra un botón adicional.
-  });
 });
 
 </script>
