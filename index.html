@@ -13,11 +13,18 @@
 <style>
 
 :root {
-  --pink: #e58bb5;
-  --pink-deep: #cb6599;
-  --pink-light: #f8d4e6;
+  --pink: #df83ad;
+  --pink-deep: #c76092;
+  --pink-light: #f5c8de;
   --pink-soft: #fff0f7;
-  --silver: #e8e8ed;
+
+  --silver: #e5e6ec;
+  --silver-dark: #b9bbc5;
+
+  --gold: #d4af37;
+  --gold-light: #f7e7a1;
+  --gold-dark: #a98218;
+
   --text: #81566e;
   --white: #fffafd;
 }
@@ -45,9 +52,9 @@ section {
   position: relative;
 }
 
-/* =================================
+/* ==========================================
    PÉTALOS
-================================= */
+========================================== */
 
 .petals-container {
   position: fixed;
@@ -59,73 +66,167 @@ section {
 
 .petal {
   position: absolute;
-  top: -50px;
-  width: 13px;
-  height: 20px;
-  border-radius: 80% 15% 80% 20%;
-  background: linear-gradient(
-    135deg,
-    #fff2f9,
-    #f3bad5 45%,
-    #df8bb6
-  );
-  opacity: .55;
-  filter: blur(.15px);
-  animation: falling linear infinite;
+  top: -60px;
+  width: 17px;
+  height: 25px;
+
+  border-radius:
+    85% 15% 75% 25%;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff6fb 0%,
+      #f7c8df 35%,
+      #e998bf 75%,
+      #d97eaa 100%
+    );
+
+  opacity: .72;
+
+  box-shadow:
+    inset 1px 1px 3px rgba(255,255,255,.7),
+    0 2px 5px rgba(177,90,137,.1);
+
+  transform-origin: center;
+
+  animation: petalFall linear infinite;
 }
 
-.petal:nth-child(3n) {
-  background: linear-gradient(
-    135deg,
-    #ffffff,
-    #f7d5e7,
-    #e9a9ca
-  );
-  opacity: .45;
+.petal::after {
+  content: "";
+  position: absolute;
+
+  width: 1px;
+  height: 65%;
+
+  top: 15%;
+  left: 50%;
+
+  background: rgba(255,255,255,.45);
+
+  transform: rotate(20deg);
 }
 
-.petal:nth-child(4n) {
-  width: 9px;
-  height: 14px;
-  opacity: .35;
+.petal.petal-light {
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff 0%,
+      #f9e6f1 35%,
+      #edb5d1 100%
+    );
+
+  opacity: .8;
 }
 
-@keyframes falling {
+.petal.petal-deep {
+  background:
+    linear-gradient(
+      145deg,
+      #f7d4e7 0%,
+      #e79abd 40%,
+      #cf6f9f 100%
+    );
+
+  opacity: .7;
+}
+
+@keyframes petalFall {
 
   0% {
-    transform: translate3d(0, -5vh, 0) rotate(0deg);
+    transform:
+      translate3d(0, -10vh, 0)
+      rotate(0deg);
   }
 
-  25% {
-    transform: translate3d(35px, 25vh, 0) rotate(100deg);
+  20% {
+    transform:
+      translate3d(55px, 20vh, 0)
+      rotate(90deg);
   }
 
-  50% {
-    transform: translate3d(-20px, 50vh, 0) rotate(210deg);
+  40% {
+    transform:
+      translate3d(-35px, 40vh, 0)
+      rotate(180deg);
   }
 
-  75% {
-    transform: translate3d(30px, 75vh, 0) rotate(310deg);
+  60% {
+    transform:
+      translate3d(45px, 60vh, 0)
+      rotate(270deg);
+  }
+
+  80% {
+    transform:
+      translate3d(-25px, 80vh, 0)
+      rotate(340deg);
   }
 
   100% {
-    transform: translate3d(-15px, 110vh, 0) rotate(420deg);
+    transform:
+      translate3d(30px, 110vh, 0)
+      rotate(440deg);
   }
 
 }
 
-/* =================================
+/* ==========================================
+   ORO METÁLICO
+========================================== */
+
+.gold {
+  background:
+    linear-gradient(
+      115deg,
+      #9d7718 0%,
+      #d4af37 15%,
+      #fff1a8 30%,
+      #c49a28 45%,
+      #f8e7a1 58%,
+      #b58a20 72%,
+      #e4c55b 86%,
+      #9d7718 100%
+    );
+
+  background-size: 220% 100%;
+  background-position: 100% 50%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  animation: goldShimmer 8s ease-in-out infinite;
+}
+
+@keyframes goldShimmer {
+
+  0%, 100% {
+    background-position: 100% 50%;
+  }
+
+  50% {
+    background-position: 0% 50%;
+  }
+
+}
+
+/* ==========================================
    PORTADA
-================================= */
+========================================== */
 
 .hero {
   min-height: 100svh;
-  position: relative;
-  overflow: hidden;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  position: relative;
+  overflow: hidden;
 
   background:
     radial-gradient(
@@ -145,12 +246,18 @@ section {
 .hero::after {
   content: "";
   position: absolute;
+
   width: 350px;
   height: 350px;
+
   border-radius: 50%;
+
   background: rgba(255,255,255,.13);
+
   filter: blur(60px);
+
   animation: float 12s ease-in-out infinite;
+
   pointer-events: none;
 }
 
@@ -166,6 +273,7 @@ section {
 }
 
 @keyframes float {
+
   0%, 100% {
     transform: translateY(0) scale(1);
   }
@@ -173,6 +281,7 @@ section {
   50% {
     transform: translateY(-25px) scale(1.08);
   }
+
 }
 
 .intro {
@@ -184,17 +293,20 @@ section {
   z-index: 2;
 }
 
-/* =================================
-   DELFINA: PLATA CRISTALINA
-================================= */
+/* ==========================================
+   DELFINA: PLATA
+========================================== */
 
 .name-wrap {
   position: relative;
   display: inline-block;
+
   width: 100%;
   max-width: 100%;
+
   padding: 0 12px;
   margin: 22px 0;
+
   animation: nameFloat 7s ease-in-out infinite;
 }
 
@@ -202,25 +314,28 @@ section {
   position: relative;
   display: block;
   width: 100%;
+
   font-family: 'Great Vibes', cursive;
   font-size: clamp(68px, 17vw, 145px);
-  line-height: 1.15;
+  line-height: 1.2;
+
   white-space: nowrap;
   text-align: center;
+
   color: transparent;
 
   background:
     linear-gradient(
       115deg,
-      #777983 0%,
+      #8c8f9b 0%,
       #ffffff 12%,
-      #bfc2cc 23%,
+      #c5c7d1 23%,
       #ffffff 35%,
-      #8b8e99 48%,
+      #9699a5 48%,
       #fefeff 60%,
       #c3c5cf 73%,
       #ffffff 86%,
-      #7e818b 100%
+      #858894 100%
     );
 
   background-size: 250% 100%;
@@ -231,37 +346,13 @@ section {
 
   filter:
     drop-shadow(0 2px 1px rgba(115,80,105,.2))
-    drop-shadow(0 0 7px rgba(255,255,255,.25));
+    drop-shadow(0 0 8px rgba(255,255,255,.25));
 
-  animation: crystalShine 8s ease-in-out infinite;
+  animation: silverShine 8s ease-in-out infinite;
 }
 
-/* Reflejo suave adicional */
+@keyframes silverShine {
 
-.name::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-
-  background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(255,255,255,.75) 45%,
-    rgba(255,255,255,.08) 52%,
-    transparent 70%
-  );
-
-  background-size: 250% 100%;
-  background-position: -150% 0;
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  animation: crystalSweep 7s ease-in-out infinite;
-}
-
-@keyframes crystalShine {
   0%, 100% {
     background-position: 100% 50%;
   }
@@ -269,19 +360,11 @@ section {
   50% {
     background-position: 0% 50%;
   }
-}
 
-@keyframes crystalSweep {
-  0%, 20% {
-    background-position: -150% 0;
-  }
-
-  70%, 100% {
-    background-position: 150% 0;
-  }
 }
 
 @keyframes nameFloat {
+
   0%, 100% {
     transform: translateY(0);
   }
@@ -289,68 +372,86 @@ section {
   50% {
     transform: translateY(-7px);
   }
+
 }
 
-.xv {
-  font-family: 'Playfair Display', serif;
-  color: #fffafc;
-  font-size: 32px;
-  letter-spacing: 12px;
-  margin-top: 10px;
-  text-shadow: 0 2px 15px rgba(255,255,255,.4);
-  position: relative;
-  z-index: 2;
+/* ==========================================
+   DETALLES DORADOS
+========================================== */
+
+.gold-ornament {
+  color: var(--gold);
+  margin: 25px 0;
+  font-size: 19px;
+  letter-spacing: 7px;
 }
 
-.subtitle {
-  color: #fff;
-  font-size: 11px;
-  letter-spacing: 3px;
-  margin-top: 25px;
-  position: relative;
-  z-index: 2;
+.gold-line {
+  width: 120px;
+  height: 1px;
+
+  margin: 22px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #bd942a,
+      #f8e6a0,
+      #bd942a,
+      transparent
+    );
 }
 
-.button {
-  display: inline-block;
-  border: 1px solid rgba(255,255,255,.8);
-  padding: 15px 35px;
-  border-radius: 50px;
-  color: white;
-  text-decoration: none;
-  background: rgba(255,255,255,.15);
-  backdrop-filter: blur(8px);
-  letter-spacing: 2px;
-  font-size: 11px;
-  margin-top: 35px;
-  transition: all .5s ease;
-  position: relative;
-  z-index: 2;
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  margin: 30px auto;
+
+  color: var(--gold);
 }
 
-.button:hover {
-  background: white;
-  color: var(--pink-deep);
-  transform: translateY(-3px);
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+  width: 65px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      var(--gold-light)
+    );
 }
 
-/* =================================
+.gold-divider::after {
+  transform: rotate(180deg);
+}
+
+/* ==========================================
    DESTELLOS
-================================= */
+========================================== */
 
 .sparkle {
   position: absolute;
-  color: white;
+  color: #fff7d9;
   opacity: 0;
+
   pointer-events: none;
+
   animation: twinkle 4s ease-in-out infinite;
+
   z-index: 2;
 }
 
 .sparkle:nth-of-type(1) {
   top: 20%;
   left: 18%;
-  animation-delay: .2s;
 }
 
 .sparkle:nth-of-type(2) {
@@ -372,6 +473,7 @@ section {
 }
 
 @keyframes twinkle {
+
   0%, 100% {
     opacity: 0;
     transform: scale(.4) rotate(0);
@@ -389,30 +491,69 @@ section {
   60% {
     opacity: .4;
   }
+
 }
 
-/* =================================
-   SECCIONES GENERALES
-================================= */
+/* ==========================================
+   BOTONES
+========================================== */
+
+.button {
+  display: inline-block;
+
+  border: 1px solid rgba(255,255,255,.8);
+  padding: 15px 35px;
+
+  border-radius: 50px;
+
+  color: white;
+  text-decoration: none;
+
+  background: rgba(255,255,255,.15);
+  backdrop-filter: blur(8px);
+
+  letter-spacing: 2px;
+  font-size: 11px;
+
+  margin-top: 35px;
+
+  transition: all .5s ease;
+
+  position: relative;
+  z-index: 2;
+}
+
+.button:hover {
+  background: white;
+  color: var(--pink-deep);
+  transform: translateY(-3px);
+}
+
+/* ==========================================
+   SECCIONES
+========================================== */
 
 .section-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(30px, 7vw, 43px);
+
   color: var(--pink-deep);
   font-weight: 400;
+
   margin: 18px 0 25px;
 }
 
 .text {
   max-width: 650px;
   margin: auto;
+
   line-height: 2;
   font-size: 13px;
 }
 
 .decor {
   font-size: 22px;
-  color: #d58bb0;
+  color: var(--pink-deep);
   margin: 25px 0;
 }
 
@@ -432,16 +573,17 @@ section {
     );
 }
 
-/* =================================
+/* ==========================================
    RSVP
-================================= */
+========================================== */
 
 .rsvp {
-  background: linear-gradient(
-    135deg,
-    #e9a4c5,
-    #f1bdd6
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #e9a4c5,
+      #f1bdd6
+    );
 }
 
 .rsvp .section-title {
@@ -455,12 +597,18 @@ section {
 form {
   max-width: 500px;
   margin: 30px auto 0;
+
   padding: 30px;
+
   text-align: left;
+
   border: 1px solid rgba(255,255,255,.7);
   border-radius: 25px;
+
   background: rgba(255,255,255,.75);
-  box-shadow: 0 15px 45px rgba(160,85,125,.08);
+
+  box-shadow:
+    0 15px 45px rgba(160,85,125,.08);
 }
 
 label {
@@ -475,11 +623,15 @@ select,
 textarea {
   width: 100%;
   padding: 13px;
+
   border-radius: 10px;
   border: 1px solid #e7bfd4;
+
   background: #fffafd;
+
   font-family: inherit;
   color: var(--text);
+
   outline: none;
   transition: border .3s;
 }
@@ -497,21 +649,37 @@ textarea {
 .submit-button {
   display: block;
   width: 100%;
+
   padding: 15px;
+
   border: none;
   border-radius: 30px;
-  background: var(--pink);
-  color: white;
+
+  background:
+    linear-gradient(
+      110deg,
+      #bd8e24,
+      #f6e59a,
+      #d0a435,
+      #f5e6a4
+    );
+
+  background-size: 200% 100%;
+
+  color: #765719;
+
   font-family: inherit;
   font-size: 11px;
   letter-spacing: 2px;
+
   margin-top: 25px;
+
   cursor: pointer;
   transition: .4s;
 }
 
 .submit-button:hover {
-  background: var(--pink-deep);
+  background-position: 100% 0;
   transform: translateY(-2px);
 }
 
@@ -527,16 +695,18 @@ textarea {
   line-height: 1.7;
 }
 
-/* =================================
-   CUENTA REGRESIVA
-================================= */
+/* ==========================================
+   COUNTDOWN
+========================================== */
 
 .countdown {
-  background: linear-gradient(
-    135deg,
-    #df86b0,
-    #eeb3d0
-  );
+  background:
+    linear-gradient(
+      135deg,
+      #df86b0,
+      #eeb3d0
+    );
+
   color: white;
 }
 
@@ -559,9 +729,13 @@ textarea {
 .count-box {
   min-width: 85px;
   padding: 20px 14px;
+
   border: 1px solid rgba(255,255,255,.5);
+
   background: rgba(255,255,255,.18);
+
   border-radius: 16px;
+
   backdrop-filter: blur(5px);
 }
 
@@ -577,9 +751,9 @@ textarea {
   letter-spacing: 2px;
 }
 
-/* =================================
+/* ==========================================
    DETALLES
-================================= */
+========================================== */
 
 .details {
   background: #fff9fc;
@@ -592,6 +766,7 @@ textarea {
 .detail-icon {
   font-size: 25px;
   margin-bottom: 10px;
+  color: var(--gold);
 }
 
 .detail strong {
@@ -609,102 +784,147 @@ textarea {
 
 .map-button {
   display: inline-block;
+
   margin-top: 15px;
   padding: 13px 28px;
-  background: var(--pink);
+
+  background:
+    linear-gradient(
+      110deg,
+      #bf942c,
+      #f4df98,
+      #d0a337
+    );
+
+  color: #765719;
+
   border-radius: 30px;
+
   text-decoration: none;
-  color: white;
+
   font-size: 11px;
   letter-spacing: 1px;
+
   transition: .4s;
 }
 
 .map-button:hover {
-  background: var(--pink-deep);
   transform: translateY(-2px);
 }
 
-/* =================================
+/* ==========================================
    REGALO
-================================= */
+========================================== */
 
 .gift {
-  background: linear-gradient(
-    180deg,
-    #fff4fa,
-    #f9ddeb
-  );
+  background:
+    linear-gradient(
+      180deg,
+      #fff4fa,
+      #f9ddeb
+    );
 }
 
 .gift-card {
   max-width: 550px;
   margin: 30px auto 0;
+
   padding: 35px 25px;
+
   border: 1px solid #ecc5da;
   border-radius: 25px;
+
   background: rgba(255,255,255,.65);
+
+  box-shadow:
+    0 10px 35px rgba(190,130,165,.08);
 }
 
 .gift-icon {
   font-size: 35px;
   margin-bottom: 15px;
+  color: var(--gold);
 }
 
 .gift-button {
   display: inline-block;
+
   margin-top: 25px;
   padding: 15px 30px;
-  background: var(--pink);
-  color: white;
+
+  background:
+    linear-gradient(
+      110deg,
+      #bd8e24,
+      #f6e59a,
+      #d0a435,
+      #f5e6a4
+    );
+
+  color: #765719;
+
   border-radius: 35px;
   text-decoration: none;
+
   font-size: 11px;
   letter-spacing: 1.5px;
+
   transition: .4s;
 }
 
 .gift-button:hover {
-  background: var(--pink-deep);
   transform: translateY(-3px);
 }
 
-/* =================================
-   GALERÍA: ÚLTIMA SECCIÓN
-================================= */
+/* ==========================================
+   GALERÍA
+========================================== */
 
 .gallery {
-  background: linear-gradient(
-    180deg,
-    #f9ddeb,
-    #fff4fa
-  );
+  background:
+    linear-gradient(
+      180deg,
+      #f9ddeb,
+      #fff4fa
+    );
 }
 
 .gallery-placeholder {
   max-width: 650px;
   margin: 35px auto;
+
   padding: 50px 20px;
+
   border: 1px dashed #d79bb8;
   border-radius: 25px;
+
   color: #c080a3;
 }
 
 .gallery-ending {
   margin-top: 50px;
+
   font-family: 'Playfair Display', serif;
   font-size: 24px;
   font-style: italic;
+
   color: #cb6599;
 }
 
-/* =================================
-   PIE
-================================= */
+/* ==========================================
+   FOOTER
+========================================== */
 
 footer {
-  background: #d77ea9;
+  background:
+    linear-gradient(
+      135deg,
+      #d77ea9,
+      #cc719d
+    );
+
   padding: 60px 20px;
+
   color: white;
   text-align: center;
 }
@@ -723,9 +943,9 @@ footer p {
   margin: 8px 0;
 }
 
-/* =================================
+/* ==========================================
    RESPONSIVE
-================================= */
+========================================== */
 
 @media (max-width: 600px) {
 
@@ -760,13 +980,14 @@ footer p {
   }
 
   .petal {
-    opacity: .4;
+    opacity: .8;
   }
+
 }
 
-/* =================================
-   REDUCIR ANIMACIONES
-================================= */
+/* ==========================================
+   ACCESIBILIDAD
+========================================== */
 
 @media (prefers-reduced-motion: reduce) {
 
@@ -785,13 +1006,11 @@ footer p {
 
 <body>
 
-<!-- CONTENEDOR DE PÉTALOS -->
-
 <div class="petals-container" id="petals"></div>
 
-<!-- =================================
+<!-- ==========================================
      PORTADA
-================================= -->
+========================================== -->
 
 <section class="hero" id="inicio">
 
@@ -808,6 +1027,10 @@ footer p {
 
   <div class="xv">MIS XV</div>
 
+  <div class="gold-divider">
+    <span>✧</span>
+  </div>
+
   <p class="subtitle">
     UNA NOCHE · UN SUEÑO · UN RECUERDO
   </p>
@@ -818,9 +1041,9 @@ footer p {
 
 </section>
 
-<!-- =================================
+<!-- ==========================================
      INVITACIÓN
-================================= -->
+========================================== -->
 
 <section class="invitation" id="invitacion">
 
@@ -832,16 +1055,16 @@ footer p {
     Te invito a celebrar
   </h2>
 
+  <div class="gold-ornament">✧ ♡ ✧</div>
+
   <p class="text">
     Hay momentos que merecen ser celebrados y sueños que comienzan
     a hacerse realidad. Me encantaría compartir con vos una noche
     única, llena de alegría, amor y recuerdos inolvidables.
   </p>
 
-  <div class="decor">✧ ♡ ✧</div>
-
-  <div class="name-wrap">
-    <h2 class="name">Delfina</h2>
+  <div class="gold-divider">
+    <span>✧</span>
   </div>
 
   <div class="xv" style="color:#d58bb0">
@@ -850,10 +1073,9 @@ footer p {
 
 </section>
 
-<!-- =================================
-     CONFIRMAR ASISTENCIA
-     POSICIÓN ELEVADA
-================================= -->
+<!-- ==========================================
+     RSVP
+========================================== -->
 
 <section class="rsvp" id="confirmacion">
 
@@ -865,6 +1087,8 @@ footer p {
     ¿Nos acompañás?
   </h2>
 
+  <div class="gold-ornament">✧</div>
+
   <p class="text">
     Confirmá tu asistencia para que podamos preparar todo
     para esta noche tan especial.
@@ -872,9 +1096,7 @@ footer p {
 
   <form id="rsvpForm">
 
-    <label for="nombre">
-      Tu nombre
-    </label>
+    <label for="nombre">Tu nombre</label>
 
     <input
       id="nombre"
@@ -883,9 +1105,7 @@ footer p {
       required
     >
 
-    <label for="asistencia">
-      ¿Vas a asistir?
-    </label>
+    <label for="asistencia">¿Vas a asistir?</label>
 
     <select id="asistencia" required>
       <option value="">Seleccioná una opción</option>
@@ -893,9 +1113,7 @@ footer p {
       <option value="No">No podré asistir</option>
     </select>
 
-    <label for="cantidad">
-      Cantidad total de personas
-    </label>
+    <label for="cantidad">Cantidad total de personas</label>
 
     <input
       id="cantidad"
@@ -916,7 +1134,7 @@ footer p {
     ></textarea>
 
     <button class="submit-button" type="submit">
-      ENVIAR CONFIRMACIÓN
+      ENVIAR CONFIRMACIÓN ♡
     </button>
 
     <p id="status" aria-live="polite"></p>
@@ -925,9 +1143,9 @@ footer p {
 
 </section>
 
-<!-- =================================
+<!-- ==========================================
      CUENTA REGRESIVA
-================================= -->
+========================================== -->
 
 <section class="countdown">
 
@@ -936,6 +1154,8 @@ footer p {
   <h2 class="section-title">
     La cuenta regresiva
   </h2>
+
+  <div class="gold-ornament">✧</div>
 
   <div class="count-grid">
 
@@ -963,9 +1183,9 @@ footer p {
 
 </section>
 
-<!-- =================================
+<!-- ==========================================
      DETALLES DEL EVENTO
-================================= -->
+========================================== -->
 
 <section class="details">
 
@@ -976,6 +1196,10 @@ footer p {
   <h2 class="section-title">
     Una noche para recordar
   </h2>
+
+  <div class="gold-divider">
+    <span>✧</span>
+  </div>
 
   <div class="detail">
 
@@ -1023,10 +1247,9 @@ footer p {
 
 </section>
 
-<!-- =================================
+<!-- ==========================================
      REGALO
-     ANTES DE GALERÍA
-================================= -->
+========================================== -->
 
 <section class="gift">
 
@@ -1038,9 +1261,13 @@ footer p {
     Un regalo para Delfina
   </h2>
 
+  <div class="gold-divider">
+    <span>♡</span>
+  </div>
+
   <div class="gift-card">
 
-    <div class="gift-icon">♡</div>
+    <div class="gift-icon">✧</div>
 
     <p class="text">
       Tu presencia es mi regalo más especial.
@@ -1060,10 +1287,9 @@ footer p {
 
 </section>
 
-<!-- =================================
-     GALERÍA
-     ÚLTIMO BLOQUE
-================================= -->
+<!-- ==========================================
+     GALERÍA: CIERRE
+========================================== -->
 
 <section class="gallery">
 
@@ -1075,12 +1301,14 @@ footer p {
     Un poquito de mí
   </h2>
 
+  <div class="gold-ornament">✧ ♡ ✧</div>
+
   <div class="gallery-placeholder">
     ✧ Pronto habrá recuerdos y fotografías especiales ✧
   </div>
 
-  <div class="decor">
-    ♡ ✧ ♡
+  <div class="gold-divider">
+    <span>♡</span>
   </div>
 
   <p class="gallery-ending">
@@ -1089,17 +1317,15 @@ footer p {
 
 </section>
 
-<!-- =================================
-     PIE
-================================= -->
+<!-- ==========================================
+     FOOTER
+========================================== -->
 
 <footer>
 
   <p>Una noche mágica está por comenzar</p>
 
-  <div class="name-wrap">
-    <h2 class="name">Delfina</h2>
-  </div>
+  <div class="gold-ornament">✧</div>
 
   <p>MIS XV · 19.12.2026</p>
 
@@ -1107,9 +1333,9 @@ footer p {
 
 <script>
 
-/* =================================
-   PÉTALOS ANIMADOS
-================================= */
+/* ==========================================
+   PÉTALOS
+========================================== */
 
 (function createPetals() {
 
@@ -1121,24 +1347,38 @@ footer p {
 
   if (reducedMotion) return;
 
-  const petalCount = window.innerWidth < 600 ? 12 : 20;
+  const count = window.innerWidth < 600 ? 17 : 27;
 
-  for (let i = 0; i < petalCount; i++) {
+  for (let i = 0; i < count; i++) {
 
     const petal = document.createElement("div");
 
     petal.className = "petal";
 
+    const variation = Math.random();
+
+    if (variation < 0.3) {
+      petal.classList.add("petal-light");
+    } else if (variation > 0.72) {
+      petal.classList.add("petal-deep");
+    }
+
+    const width = 13 + Math.random() * 12;
+    const height = width * (1.25 + Math.random() * .55);
+
+    petal.style.width = width + "px";
+    petal.style.height = height + "px";
+
     petal.style.left = Math.random() * 100 + "%";
 
     petal.style.animationDuration =
-      (12 + Math.random() * 15) + "s";
+      (11 + Math.random() * 15) + "s";
 
     petal.style.animationDelay =
       (-Math.random() * 25) + "s";
 
-    petal.style.transform =
-      `rotate(${Math.random() * 360}deg)`;
+    petal.style.borderRadius =
+      `${70 + Math.random() * 25}% ${10 + Math.random() * 20}% ${70 + Math.random() * 25}% ${10 + Math.random() * 20}%`;
 
     container.appendChild(petal);
 
@@ -1147,9 +1387,9 @@ footer p {
 })();
 
 
-/* =================================
-   CUENTA REGRESIVA
-================================= */
+/* ==========================================
+   COUNTDOWN
+========================================== */
 
 const eventDate =
   new Date("2026-12-19T21:00:00-03:00").getTime();
@@ -1182,20 +1422,18 @@ function updateCountdown() {
 }
 
 updateCountdown();
-
 setInterval(updateCountdown, 1000);
 
 
-/* =================================
-   CONFIRMACIONES
-================================= */
+/* ==========================================
+   RSVP
+========================================== */
 
 const form = document.getElementById("rsvpForm");
 const attendance = document.getElementById("asistencia");
 const people = document.getElementById("cantidad");
 const statusText = document.getElementById("status");
 const submitButton = form.querySelector(".submit-button");
-
 
 attendance.addEventListener("change", () => {
 
@@ -1214,7 +1452,6 @@ attendance.addEventListener("change", () => {
   }
 
 });
-
 
 form.addEventListener("submit", async (event) => {
 
@@ -1274,9 +1511,9 @@ form.addEventListener("submit", async (event) => {
 });
 
 
-/* =================================
+/* ==========================================
    REGALO
-================================= */
+========================================== */
 
 document.getElementById("giftButton").addEventListener("click", (event) => {
 
