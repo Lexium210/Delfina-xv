@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#e58bb5">
+<meta name="theme-color" content="#df83ad">
 
 <title>Delfina | Mis XV</title>
 
@@ -12,11 +12,17 @@
 
 <style>
 
+/* ==========================================
+   PALETA
+========================================== */
+
 :root {
   --pink: #df83ad;
   --pink-deep: #c76092;
-  --pink-light: #f5c8de;
-  --pink-soft: #fff0f7;
+  --pink-medium: #e9a5c5;
+  --pink-light: #f8e0ed;
+  --pink-petal: #fff2f9;
+  --pink-bg: #fdf4f9;
 
   --silver: #e5e6ec;
   --silver-dark: #b9bbc5;
@@ -41,135 +47,15 @@ html {
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background: var(--pink-soft);
+  background: var(--pink-bg);
   color: var(--text);
   overflow-x: hidden;
 }
 
 section {
-  padding: 100px 22px;
+  padding: 95px 22px;
   text-align: center;
   position: relative;
-}
-
-/* ==========================================
-   PÉTALOS
-========================================== */
-
-.petals-container {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 50;
-}
-
-.petal {
-  position: absolute;
-  top: -60px;
-  width: 17px;
-  height: 25px;
-
-  border-radius:
-    85% 15% 75% 25%;
-
-  background:
-    linear-gradient(
-      145deg,
-      #fff6fb 0%,
-      #f7c8df 35%,
-      #e998bf 75%,
-      #d97eaa 100%
-    );
-
-  opacity: .72;
-
-  box-shadow:
-    inset 1px 1px 3px rgba(255,255,255,.7),
-    0 2px 5px rgba(177,90,137,.1);
-
-  transform-origin: center;
-
-  animation: petalFall linear infinite;
-}
-
-.petal::after {
-  content: "";
-  position: absolute;
-
-  width: 1px;
-  height: 65%;
-
-  top: 15%;
-  left: 50%;
-
-  background: rgba(255,255,255,.45);
-
-  transform: rotate(20deg);
-}
-
-.petal.petal-light {
-  background:
-    linear-gradient(
-      145deg,
-      #ffffff 0%,
-      #f9e6f1 35%,
-      #edb5d1 100%
-    );
-
-  opacity: .8;
-}
-
-.petal.petal-deep {
-  background:
-    linear-gradient(
-      145deg,
-      #f7d4e7 0%,
-      #e79abd 40%,
-      #cf6f9f 100%
-    );
-
-  opacity: .7;
-}
-
-@keyframes petalFall {
-
-  0% {
-    transform:
-      translate3d(0, -10vh, 0)
-      rotate(0deg);
-  }
-
-  20% {
-    transform:
-      translate3d(55px, 20vh, 0)
-      rotate(90deg);
-  }
-
-  40% {
-    transform:
-      translate3d(-35px, 40vh, 0)
-      rotate(180deg);
-  }
-
-  60% {
-    transform:
-      translate3d(45px, 60vh, 0)
-      rotate(270deg);
-  }
-
-  80% {
-    transform:
-      translate3d(-25px, 80vh, 0)
-      rotate(340deg);
-  }
-
-  100% {
-    transform:
-      translate3d(30px, 110vh, 0)
-      rotate(440deg);
-  }
-
 }
 
 /* ==========================================
@@ -191,7 +77,6 @@ section {
     );
 
   background-size: 220% 100%;
-  background-position: 100% 50%;
 
   -webkit-background-clip: text;
   background-clip: text;
@@ -202,15 +87,134 @@ section {
 }
 
 @keyframes goldShimmer {
+  0%, 100% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+}
 
-  0%, 100% {
-    background-position: 100% 50%;
+.gold-text {
+  background:
+    linear-gradient(
+      110deg,
+      #a17a20,
+      #e2c45b,
+      #fff0a6,
+      #c39a2d,
+      #f4e5a1,
+      #a17a20
+    );
+
+  background-size: 200% 100%;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  animation: goldShimmer 8s ease-in-out infinite;
+}
+
+/* ==========================================
+   PETALOS
+========================================== */
+
+.petals-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.petal {
+  position: absolute;
+  top: -70px;
+
+  width: 19px;
+  height: 29px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fff7fb 0%,
+      #f7c8df 35%,
+      #e998bf 75%,
+      #d97eaa 100%
+    );
+
+  opacity: .8;
+
+  box-shadow:
+    inset 1px 1px 4px rgba(255,255,255,.75),
+    0 3px 6px rgba(177,90,137,.12);
+
+  transform-origin: center;
+
+  animation: petalFall linear infinite;
+}
+
+.petal::after {
+  content: "";
+  position: absolute;
+
+  width: 1px;
+  height: 65%;
+
+  top: 15%;
+  left: 50%;
+
+  background: rgba(255,255,255,.55);
+
+  transform: rotate(20deg);
+}
+
+.petal-light {
+  background:
+    linear-gradient(
+      145deg,
+      #ffffff,
+      #f9e6f1 35%,
+      #edb5d1
+    );
+
+  opacity: .85;
+}
+
+.petal-deep {
+  background:
+    linear-gradient(
+      145deg,
+      #f7d4e7,
+      #e79abd 40%,
+      #cf6f9f
+    );
+
+  opacity: .76;
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0,-10vh,0) rotate(0deg);
   }
 
-  50% {
-    background-position: 0% 50%;
+  20% {
+    transform: translate3d(65px,20vh,0) rotate(100deg);
   }
 
+  40% {
+    transform: translate3d(-45px,40vh,0) rotate(200deg);
+  }
+
+  60% {
+    transform: translate3d(55px,60vh,0) rotate(300deg);
+  }
+
+  80% {
+    transform: translate3d(-35px,80vh,0) rotate(390deg);
+  }
+
+  100% {
+    transform: translate3d(25px,110vh,0) rotate(490deg);
+  }
 }
 
 /* ==========================================
@@ -228,74 +232,152 @@ section {
   position: relative;
   overflow: hidden;
 
+  padding: 60px 20px;
+
   background:
     radial-gradient(
-      ellipse at 50% 45%,
-      rgba(255,255,255,.30),
-      transparent 48%
+      circle at 50% 45%,
+      rgba(255,255,255,.32),
+      transparent 43%
     ),
     linear-gradient(
       140deg,
-      #f0b2cf,
+      #efb5d1,
       #e58bb5 50%,
       #d77ba8
     );
 }
 
-.hero::before,
-.hero::after {
+/* Aura */
+
+.hero::before {
   content: "";
+
   position: absolute;
 
-  width: 350px;
-  height: 350px;
+  width: 420px;
+  height: 420px;
 
   border-radius: 50%;
 
-  background: rgba(255,255,255,.13);
+  background: rgba(255,255,255,.17);
 
-  filter: blur(60px);
+  filter: blur(65px);
 
-  animation: float 12s ease-in-out infinite;
+  animation: auraFloat 10s ease-in-out infinite;
 
   pointer-events: none;
 }
 
-.hero::before {
-  top: -100px;
-  left: -120px;
-}
-
 .hero::after {
-  bottom: -120px;
-  right: -100px;
-  animation-delay: -6s;
+  content: "";
+
+  position: absolute;
+
+  width: 270px;
+  height: 270px;
+
+  border-radius: 50%;
+
+  background: rgba(255,230,245,.18);
+
+  filter: blur(50px);
+
+  bottom: -100px;
+  right: -80px;
+
+  pointer-events: none;
 }
 
-@keyframes float {
-
-  0%, 100% {
+@keyframes auraFloat {
+  0%,100% {
     transform: translateY(0) scale(1);
   }
 
   50% {
-    transform: translateY(-25px) scale(1.08);
+    transform: translateY(-22px) scale(1.08);
+  }
+}
+
+/* Halo dorado */
+
+.hero-halo {
+  position: absolute;
+
+  width: min(80vw, 390px);
+  height: min(80vw, 390px);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(247,231,161,.65);
+
+  box-shadow:
+    0 0 12px rgba(248,231,161,.12),
+    inset 0 0 12px rgba(248,231,161,.08);
+
+  opacity: .85;
+
+  animation: haloBreath 7s ease-in-out infinite;
+
+  pointer-events: none;
+}
+
+.hero-halo::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 12px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,246,210,.24);
+}
+
+.hero-halo::after {
+  content: "✧";
+
+  position: absolute;
+
+  top: -12px;
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  color: #f8e7a1;
+
+  font-size: 20px;
+
+  text-shadow: 0 0 10px rgba(255,245,200,.7);
+}
+
+@keyframes haloBreath {
+  0%,100% {
+    opacity: .55;
+    transform: scale(.98);
   }
 
+  50% {
+    opacity: .95;
+    transform: scale(1.02);
+  }
 }
+
+/* Texto portada */
 
 .intro {
   letter-spacing: 5px;
   text-transform: uppercase;
   font-size: 10px;
   color: #fffafc;
+
   position: relative;
-  z-index: 2;
+  z-index: 3;
 }
 
-/* ==========================================
-   DELFINA: PLATA
-========================================== */
+.hero-intro {
+  margin-bottom: 12px;
+}
 
 .name-wrap {
   position: relative;
@@ -304,8 +386,10 @@ section {
   width: 100%;
   max-width: 100%;
 
-  padding: 0 12px;
-  margin: 22px 0;
+  padding: 0 10px;
+  margin: 12px 0;
+
+  z-index: 3;
 
   animation: nameFloat 7s ease-in-out infinite;
 }
@@ -313,11 +397,12 @@ section {
 .name {
   position: relative;
   display: block;
-  width: 100%;
 
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(68px, 17vw, 145px);
-  line-height: 1.2;
+
+  font-size: clamp(70px, 17vw, 145px);
+
+  line-height: 1.25;
 
   white-space: nowrap;
   text-align: center;
@@ -352,71 +437,39 @@ section {
 }
 
 @keyframes silverShine {
-
-  0%, 100% {
-    background-position: 100% 50%;
-  }
-
-  50% {
-    background-position: 0% 50%;
-  }
-
+  0%,100% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
 }
 
 @keyframes nameFloat {
-
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-7px);
-  }
-
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-7px); }
 }
 
-/* ==========================================
-   DETALLES DORADOS
-========================================== */
+/* Ornamento debajo del nombre */
 
-.gold-ornament {
-  color: var(--gold);
-  margin: 25px 0;
-  font-size: 19px;
-  letter-spacing: 7px;
-}
+.cover-ornament {
+  position: relative;
+  z-index: 3;
 
-.gold-line {
-  width: 120px;
-  height: 1px;
-
-  margin: 22px auto;
-
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #bd942a,
-      #f8e6a0,
-      #bd942a,
-      transparent
-    );
-}
-
-.gold-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
 
-  margin: 30px auto;
+  gap: 16px;
 
-  color: var(--gold);
+  margin: 22px 0 15px;
+
+  color: var(--gold-light);
+
+  font-size: 18px;
+  letter-spacing: 5px;
 }
 
-.gold-divider::before,
-.gold-divider::after {
+.cover-ornament::before,
+.cover-ornament::after {
   content: "";
+
   width: 65px;
   height: 1px;
 
@@ -424,13 +477,43 @@ section {
     linear-gradient(
       90deg,
       transparent,
-      var(--gold),
-      var(--gold-light)
+      #d4af37,
+      #fff0a6
     );
 }
 
-.gold-divider::after {
+.cover-ornament::after {
   transform: rotate(180deg);
+}
+
+.xv {
+  position: relative;
+  z-index: 3;
+
+  font-family: 'Playfair Display', serif;
+
+  font-size: clamp(27px, 6vw, 42px);
+
+  letter-spacing: 12px;
+
+  color: #fff7fc;
+
+  text-shadow:
+    0 1px 3px rgba(158,81,125,.12);
+
+  margin: 8px 0;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 3;
+
+  font-size: 9px;
+  letter-spacing: 3px;
+
+  color: rgba(255,255,255,.92);
+
+  margin-top: 12px;
 }
 
 /* ==========================================
@@ -439,18 +522,20 @@ section {
 
 .sparkle {
   position: absolute;
+
   color: #fff7d9;
+
   opacity: 0;
 
   pointer-events: none;
 
   animation: twinkle 4s ease-in-out infinite;
 
-  z-index: 2;
+  z-index: 3;
 }
 
 .sparkle:nth-of-type(1) {
-  top: 20%;
+  top: 18%;
   left: 18%;
 }
 
@@ -473,8 +558,7 @@ section {
 }
 
 @keyframes twinkle {
-
-  0%, 100% {
+  0%,100% {
     opacity: 0;
     transform: scale(.4) rotate(0);
   }
@@ -491,42 +575,72 @@ section {
   60% {
     opacity: .4;
   }
-
 }
 
 /* ==========================================
-   BOTONES
+   BOTONES DORADOS
 ========================================== */
+
+.button,
+.map-button,
+.gift-button,
+.submit-button {
+  background:
+    linear-gradient(
+      110deg,
+      #b58a20 0%,
+      #e3c65d 18%,
+      #fff0a7 35%,
+      #c49a28 50%,
+      #f5e6a1 65%,
+      #b58a20 82%,
+      #e3c65d 100%
+    );
+
+  background-size: 220% 100%;
+
+  color: #765719;
+
+  border: 1px solid rgba(255,246,210,.8);
+
+  box-shadow:
+    0 5px 18px rgba(164,119,30,.12);
+
+  transition: all .5s ease;
+
+  animation: goldButtonShine 9s ease-in-out infinite;
+}
+
+@keyframes goldButtonShine {
+  0%,100% { background-position: 100% 50%; }
+  50% { background-position: 0% 50%; }
+}
 
 .button {
   display: inline-block;
 
-  border: 1px solid rgba(255,255,255,.8);
+  position: relative;
+  z-index: 3;
+
   padding: 15px 35px;
 
   border-radius: 50px;
 
-  color: white;
   text-decoration: none;
-
-  background: rgba(255,255,255,.15);
-  backdrop-filter: blur(8px);
 
   letter-spacing: 2px;
   font-size: 11px;
 
-  margin-top: 35px;
-
-  transition: all .5s ease;
-
-  position: relative;
-  z-index: 2;
+  margin-top: 32px;
 }
 
-.button:hover {
-  background: white;
-  color: var(--pink-deep);
-  transform: translateY(-3px);
+.button:hover,
+.map-button:hover,
+.gift-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 10px 24px rgba(164,119,30,.18);
 }
 
 /* ==========================================
@@ -535,9 +649,11 @@ section {
 
 .section-title {
   font-family: 'Playfair Display', serif;
+
   font-size: clamp(30px, 7vw, 43px);
 
   color: var(--pink-deep);
+
   font-weight: 400;
 
   margin: 18px 0 25px;
@@ -551,25 +667,62 @@ section {
   font-size: 13px;
 }
 
-.decor {
-  font-size: 22px;
-  color: var(--pink-deep);
+.gold-ornament {
   margin: 25px 0;
+
+  font-size: 19px;
+  letter-spacing: 7px;
+
+  color: var(--gold);
 }
 
-/* INVITACIÓN */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 12px;
+
+  margin: 30px auto;
+
+  color: var(--gold);
+}
+
+.gold-divider::before,
+.gold-divider::after {
+  content: "";
+
+  width: 65px;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--gold),
+      var(--gold-light)
+    );
+}
+
+.gold-divider::after {
+  transform: rotate(180deg);
+}
+
+/* ==========================================
+   INVITACIÓN
+========================================== */
 
 .invitation {
   background:
     radial-gradient(
-      circle at 10% 20%,
-      #fff 0%,
+      circle at 15% 20%,
+      rgba(255,255,255,.7),
       transparent 25%
     ),
     linear-gradient(
       180deg,
       #fff4fa,
-      #f9ddeb
+      #fbe8f2
     );
 }
 
@@ -596,16 +749,18 @@ section {
 
 form {
   max-width: 500px;
+
   margin: 30px auto 0;
 
   padding: 30px;
 
   text-align: left;
 
-  border: 1px solid rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.8);
+
   border-radius: 25px;
 
-  background: rgba(255,255,255,.75);
+  background: rgba(255,245,251,.88);
 
   box-shadow:
     0 15px 45px rgba(160,85,125,.08);
@@ -613,7 +768,9 @@ form {
 
 label {
   display: block;
+
   margin: 18px 0 8px;
+
   font-size: 11px;
   letter-spacing: 1px;
 }
@@ -622,17 +779,21 @@ input,
 select,
 textarea {
   width: 100%;
+
   padding: 13px;
 
   border-radius: 10px;
+
   border: 1px solid #e7bfd4;
 
-  background: #fffafd;
+  background: #fff6fb;
 
   font-family: inherit;
+
   color: var(--text);
 
   outline: none;
+
   transition: border .3s;
 }
 
@@ -648,38 +809,24 @@ textarea {
 
 .submit-button {
   display: block;
+
   width: 100%;
 
   padding: 15px;
 
-  border: none;
   border-radius: 30px;
 
-  background:
-    linear-gradient(
-      110deg,
-      #bd8e24,
-      #f6e59a,
-      #d0a435,
-      #f5e6a4
-    );
-
-  background-size: 200% 100%;
-
-  color: #765719;
-
   font-family: inherit;
+
   font-size: 11px;
   letter-spacing: 2px;
 
   margin-top: 25px;
 
   cursor: pointer;
-  transition: .4s;
 }
 
 .submit-button:hover {
-  background-position: 100% 0;
   transform: translateY(-2px);
 }
 
@@ -690,13 +837,16 @@ textarea {
 
 #status {
   text-align: center;
+
   font-size: 12px;
+
   margin-top: 15px;
+
   line-height: 1.7;
 }
 
 /* ==========================================
-   COUNTDOWN
+   CUENTA REGRESIVA
 ========================================== */
 
 .countdown {
@@ -710,29 +860,30 @@ textarea {
   color: white;
 }
 
-.countdown .section-title {
-  color: white;
-}
-
+.countdown .section-title,
 .countdown .intro {
-  color: #fff8fc;
+  color: white;
 }
 
 .count-grid {
   display: flex;
+
   justify-content: center;
   gap: 12px;
+
   flex-wrap: wrap;
+
   margin-top: 35px;
 }
 
 .count-box {
   min-width: 85px;
+
   padding: 20px 14px;
 
-  border: 1px solid rgba(255,255,255,.5);
+  border: 1px solid rgba(255,255,255,.55);
 
-  background: rgba(255,255,255,.18);
+  background: rgba(255,255,255,.2);
 
   border-radius: 16px;
 
@@ -741,8 +892,11 @@ textarea {
 
 .count-box strong {
   display: block;
+
   font-family: 'Playfair Display', serif;
+
   font-size: 32px;
+
   color: white;
 }
 
@@ -752,64 +906,87 @@ textarea {
 }
 
 /* ==========================================
-   DETALLES
+   FECHA, HORA, LUGAR
 ========================================== */
 
 .details {
-  background: #fff9fc;
+  background:
+    linear-gradient(
+      180deg,
+      #fff4fa,
+      #fbe8f2
+    );
 }
 
 .detail {
-  margin: 32px auto;
+  margin: 38px auto;
+
+  padding: 12px 10px;
+
+  max-width: 550px;
 }
 
 .detail-icon {
-  font-size: 25px;
-  margin-bottom: 10px;
+  font-size: 30px;
+
+  margin-bottom: 14px;
+
   color: var(--gold);
 }
 
 .detail strong {
   display: block;
+
   color: var(--pink-deep);
-  letter-spacing: 3px;
-  font-size: 11px;
-  margin-bottom: 10px;
+
+  letter-spacing: 4px;
+
+  font-size: 13px;
+
+  margin-bottom: 14px;
 }
 
 .detail p {
-  font-size: 14px;
-  line-height: 1.8;
+  font-size: 17px;
+
+  line-height: 1.9;
 }
+
+.detail p + p {
+  margin-top: 5px;
+}
+
+.detail .place-name {
+  font-family: 'Playfair Display', serif;
+
+  font-size: 25px;
+
+  color: #bd7099;
+
+  margin-bottom: 7px;
+}
+
+.detail .address {
+  font-size: 16px;
+
+  line-height: 1.9;
+}
+
+/* Botón mapa */
 
 .map-button {
   display: inline-block;
 
-  margin-top: 15px;
-  padding: 13px 28px;
+  margin-top: 22px;
 
-  background:
-    linear-gradient(
-      110deg,
-      #bf942c,
-      #f4df98,
-      #d0a337
-    );
+  padding: 15px 30px;
 
-  color: #765719;
-
-  border-radius: 30px;
+  border-radius: 35px;
 
   text-decoration: none;
 
   font-size: 11px;
-  letter-spacing: 1px;
-
-  transition: .4s;
-}
-
-.map-button:hover {
-  transform: translateY(-2px);
+  letter-spacing: 1.5px;
 }
 
 /* ==========================================
@@ -820,21 +997,23 @@ textarea {
   background:
     linear-gradient(
       180deg,
-      #fff4fa,
-      #f9ddeb
+      #fbe8f2,
+      #fff3fa
     );
 }
 
 .gift-card {
   max-width: 550px;
+
   margin: 30px auto 0;
 
   padding: 35px 25px;
 
-  border: 1px solid #ecc5da;
+  border: 1px solid #e7c5d9;
+
   border-radius: 25px;
 
-  background: rgba(255,255,255,.65);
+  background: rgba(255,250,253,.72);
 
   box-shadow:
     0 10px 35px rgba(190,130,165,.08);
@@ -842,7 +1021,9 @@ textarea {
 
 .gift-icon {
   font-size: 35px;
+
   margin-bottom: 15px;
+
   color: var(--gold);
 }
 
@@ -850,30 +1031,15 @@ textarea {
   display: inline-block;
 
   margin-top: 25px;
+
   padding: 15px 30px;
 
-  background:
-    linear-gradient(
-      110deg,
-      #bd8e24,
-      #f6e59a,
-      #d0a435,
-      #f5e6a4
-    );
-
-  color: #765719;
-
   border-radius: 35px;
+
   text-decoration: none;
 
   font-size: 11px;
   letter-spacing: 1.5px;
-
-  transition: .4s;
-}
-
-.gift-button:hover {
-  transform: translateY(-3px);
 }
 
 /* ==========================================
@@ -884,18 +1050,20 @@ textarea {
   background:
     linear-gradient(
       180deg,
-      #f9ddeb,
-      #fff4fa
+      #fff3fa,
+      #fbe8f2
     );
 }
 
 .gallery-placeholder {
   max-width: 650px;
+
   margin: 35px auto;
 
   padding: 50px 20px;
 
   border: 1px dashed #d79bb8;
+
   border-radius: 25px;
 
   color: #c080a3;
@@ -905,7 +1073,9 @@ textarea {
   margin-top: 50px;
 
   font-family: 'Playfair Display', serif;
+
   font-size: 24px;
+
   font-style: italic;
 
   color: #cb6599;
@@ -926,6 +1096,7 @@ footer {
   padding: 60px 20px;
 
   color: white;
+
   text-align: center;
 }
 
@@ -939,12 +1110,14 @@ footer .name {
 
 footer p {
   font-size: 11px;
+
   letter-spacing: 2px;
+
   margin: 8px 0;
 }
 
 /* ==========================================
-   RESPONSIVE
+   MOBILE
 ========================================== */
 
 @media (max-width: 600px) {
@@ -958,12 +1131,15 @@ footer p {
     padding-right: 10px;
   }
 
-  .name-wrap {
-    padding: 0 5px;
+  .hero .name {
+    font-size: clamp(72px, 21vw, 120px);
   }
 
-  .hero .name {
-    font-size: clamp(70px, 21vw, 120px);
+  .hero-halo {
+    width: 88vw;
+    height: 88vw;
+    max-width: 360px;
+    max-height: 360px;
   }
 
   .count-box {
@@ -979,14 +1155,30 @@ footer p {
     padding: 22px;
   }
 
+  .detail {
+    margin: 28px auto;
+  }
+
+  .detail p {
+    font-size: 16px;
+  }
+
+  .detail .place-name {
+    font-size: 23px;
+  }
+
+  .detail .address {
+    font-size: 15px;
+  }
+
   .petal {
-    opacity: .8;
+    opacity: .85;
   }
 
 }
 
 /* ==========================================
-   ACCESIBILIDAD
+   MOVIMIENTO REDUCIDO
 ========================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1014,21 +1206,29 @@ footer p {
 
 <section class="hero" id="inicio">
 
+  <div class="hero-halo"></div>
+
   <span class="sparkle">✦</span>
   <span class="sparkle">✧</span>
   <span class="sparkle">✦</span>
   <span class="sparkle">✧</span>
 
-  <p class="intro">Una noche especial</p>
+  <p class="intro hero-intro">
+    Una noche especial
+  </p>
 
   <div class="name-wrap">
     <h1 class="name">Delfina</h1>
   </div>
 
-  <div class="xv">MIS XV</div>
-
-  <div class="gold-divider">
+  <div class="cover-ornament">
     <span>✧</span>
+    <span>♡</span>
+    <span>✧</span>
+  </div>
+
+  <div class="xv">
+    MIS XV
   </div>
 
   <p class="subtitle">
@@ -1036,7 +1236,7 @@ footer p {
   </p>
 
   <a href="#invitacion" class="button">
-    ABRIR INVITACIÓN ✧
+    ✧ ABRIR INVITACIÓN ✧
   </a>
 
 </section>
@@ -1055,7 +1255,9 @@ footer p {
     Te invito a celebrar
   </h2>
 
-  <div class="gold-ornament">✧ ♡ ✧</div>
+  <div class="gold-ornament">
+    ✧ ♡ ✧
+  </div>
 
   <p class="text">
     Hay momentos que merecen ser celebrados y sueños que comienzan
@@ -1074,7 +1276,7 @@ footer p {
 </section>
 
 <!-- ==========================================
-     RSVP
+     CONFIRMAR ASISTENCIA
 ========================================== -->
 
 <section class="rsvp" id="confirmacion">
@@ -1087,7 +1289,9 @@ footer p {
     ¿Nos acompañás?
   </h2>
 
-  <div class="gold-ornament">✧</div>
+  <div class="gold-ornament">
+    ✧
+  </div>
 
   <p class="text">
     Confirmá tu asistencia para que podamos preparar todo
@@ -1096,7 +1300,9 @@ footer p {
 
   <form id="rsvpForm">
 
-    <label for="nombre">Tu nombre</label>
+    <label for="nombre">
+      Tu nombre
+    </label>
 
     <input
       id="nombre"
@@ -1105,7 +1311,9 @@ footer p {
       required
     >
 
-    <label for="asistencia">¿Vas a asistir?</label>
+    <label for="asistencia">
+      ¿Vas a asistir?
+    </label>
 
     <select id="asistencia" required>
       <option value="">Seleccioná una opción</option>
@@ -1113,7 +1321,9 @@ footer p {
       <option value="No">No podré asistir</option>
     </select>
 
-    <label for="cantidad">Cantidad total de personas</label>
+    <label for="cantidad">
+      Cantidad total de personas
+    </label>
 
     <input
       id="cantidad"
@@ -1149,13 +1359,17 @@ footer p {
 
 <section class="countdown">
 
-  <p class="intro">Cada vez falta menos</p>
+  <p class="intro">
+    Cada vez falta menos
+  </p>
 
   <h2 class="section-title">
     La cuenta regresiva
   </h2>
 
-  <div class="gold-ornament">✧</div>
+  <div class="gold-ornament">
+    ✧
+  </div>
 
   <div class="count-grid">
 
@@ -1184,7 +1398,7 @@ footer p {
 </section>
 
 <!-- ==========================================
-     DETALLES DEL EVENTO
+     FECHA / HORA / LUGAR
 ========================================== -->
 
 <section class="details">
@@ -1227,9 +1441,11 @@ footer p {
 
     <strong>LUGAR</strong>
 
-    <p>Espacio Azalia</p>
+    <p class="place-name">
+      Espacio Azalia
+    </p>
 
-    <p>
+    <p class="address">
       Manuel Acevedo 440<br>
       Lomas de Zamora
     </p>
@@ -1288,7 +1504,7 @@ footer p {
 </section>
 
 <!-- ==========================================
-     GALERÍA: CIERRE
+     GALERÍA
 ========================================== -->
 
 <section class="gallery">
@@ -1301,7 +1517,9 @@ footer p {
     Un poquito de mí
   </h2>
 
-  <div class="gold-ornament">✧ ♡ ✧</div>
+  <div class="gold-ornament">
+    ✧ ♡ ✧
+  </div>
 
   <div class="gallery-placeholder">
     ✧ Pronto habrá recuerdos y fotografías especiales ✧
@@ -1323,18 +1541,24 @@ footer p {
 
 <footer>
 
-  <p>Una noche mágica está por comenzar</p>
+  <p>
+    Una noche mágica está por comenzar
+  </p>
 
-  <div class="gold-ornament">✧</div>
+  <div class="gold-ornament">
+    ✧
+  </div>
 
-  <p>MIS XV · 19.12.2026</p>
+  <p>
+    MIS XV · 19.12.2026
+  </p>
 
 </footer>
 
 <script>
 
 /* ==========================================
-   PÉTALOS
+   PETALOS
 ========================================== */
 
 (function createPetals() {
@@ -1347,7 +1571,7 @@ footer p {
 
   if (reducedMotion) return;
 
-  const count = window.innerWidth < 600 ? 17 : 27;
+  const count = window.innerWidth < 600 ? 18 : 28;
 
   for (let i = 0; i < count; i++) {
 
@@ -1363,8 +1587,8 @@ footer p {
       petal.classList.add("petal-deep");
     }
 
-    const width = 13 + Math.random() * 12;
-    const height = width * (1.25 + Math.random() * .55);
+    const width = 15 + Math.random() * 12;
+    const height = width * (1.3 + Math.random() * .6);
 
     petal.style.width = width + "px";
     petal.style.height = height + "px";
@@ -1372,7 +1596,7 @@ footer p {
     petal.style.left = Math.random() * 100 + "%";
 
     petal.style.animationDuration =
-      (11 + Math.random() * 15) + "s";
+      (12 + Math.random() * 15) + "s";
 
     petal.style.animationDelay =
       (-Math.random() * 25) + "s";
@@ -1471,7 +1695,9 @@ form.addEventListener("submit", async (event) => {
 
   };
 
-  statusText.textContent = "Enviando confirmación ♡";
+  statusText.textContent =
+    "Enviando confirmación ♡";
+
   submitButton.disabled = true;
 
   try {
