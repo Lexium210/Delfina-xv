@@ -1222,6 +1222,42 @@ footer p {
 
 }
 
+
+/* ==========================================
+   INDICADORES SUTILES DE DESPLAZAMIENTO
+========================================== */
+
+.hero::after,
+.invitation::after,
+.rsvp::after,
+.countdown::after,
+.details::after,
+.dress-code::after,
+.gift::after {
+  content: "⌄";
+  position: absolute;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%);
+  color: var(--gold);
+  font-size: 27px;
+  font-weight: 300;
+  line-height: 1;
+  opacity: .72;
+  text-shadow: 0 1px 5px rgba(212, 175, 55, .16);
+  animation: scrollCue 2.2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes scrollCue {
+  0%, 100% { transform: translate(-50%, 0); opacity: .52; }
+  50% { transform: translate(-50%, 5px); opacity: .9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero::after, .invitation::after, .rsvp::after, .countdown::after,
+  .details::after, .dress-code::after, .gift::after { animation: none; }
+}
 </style>
 </head>
 
