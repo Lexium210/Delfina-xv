@@ -1104,6 +1104,10 @@ textarea {
   color: var(--pink-deep);
   font-weight: 600;
 }
+.gift-button + .gift-button {
+  margin-top: 12px;
+}
+
 .gift-feedback {
   min-height: 24px;
   margin-top: 14px;
@@ -1542,9 +1546,18 @@ footer p {
     <button
       type="button"
       class="gift-button"
-      id="giftButton"
+      id="copyAliasButton"
     >
-      ♡ COPIAR ALIAS DE MERCADO PAGO ♡
+      ♡ COPIAR ALIAS ♡
+    </button>
+
+
+    <button
+      type="button"
+      class="gift-button"
+      id="openMercadoPagoButton"
+    >
+      ♡ ABRIR MERCADO PAGO ♡
     </button>
 
     <p class="gift-feedback" id="giftFeedback" aria-live="polite"></p>
@@ -1799,24 +1812,23 @@ form.addEventListener("submit", async (event) => {
    REGALO
 ========================================== */
 
-document.getElementById("giftButton").addEventListener("click", async () => {
-
+document.getElementById("copyAliasButton").addEventListener("click", async () => {
   const alias = "juramento.radiante";
   const feedback = document.getElementById("giftFeedback");
-
-  /* Copia el alias y solicita a Android abrir Mercado Pago directamente
-     por paquete, en vez de navegar a su página web. Si la app no está
-     instalada, el Intent ofrece como alternativa la web oficial. */
   try {
     await navigator.clipboard.writeText(alias);
-    feedback.textContent = "Alias copiado: juramento.radiante. Pegalo en Mercado Pago para enviar tu regalo. ¡Gracias por tu cariño! ♡";
+    feedback.textContent = "Alias copiado ♡ Gracias por tu cariño y por acompañarme en este día tan especial.";
   } catch (error) {
-    feedback.textContent = "Alias para tu regalo: juramento.radiante. ¡Gracias por tu cariño! ♡";
+    feedback.textContent = "Mi alias es juramento.radiante ♡ Gracias por tu cariño.";
   }
+});
 
-  const mpIntent = "intent://www.mercadopago.com.ar/#Intent;scheme=https;package=com.mercadopago.wallet;S.browser_fallback_url=https%3A%2F%2Fwww.mercadopago.com.ar%2F;end";
+
+/* Botón independiente: intenta invocar la app Android Mercado Pago
+   mediante URI Intent con scheme mercadopago y package de la app. */
+document.getElementById("openMercadoPagoButton").addEventListener("click", () => {
+  const mpIntent = "intent://open/#Intent;scheme=mercadopago;package=com.mercadopago.wallet;end";
   window.location.href = mpIntent;
-
 });
 
 
