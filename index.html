@@ -5,11 +5,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#e58bb5">
+
 <title>Delfina | Mis XV</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
+
 :root {
   --pink: #e58bb5;
   --pink-deep: #cb6599;
@@ -40,14 +42,84 @@ body {
 section {
   padding: 100px 22px;
   text-align: center;
+  position: relative;
 }
 
-/* =========================
+/* =================================
+   PÉTALOS
+================================= */
+
+.petals-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 50;
+}
+
+.petal {
+  position: absolute;
+  top: -50px;
+  width: 13px;
+  height: 20px;
+  border-radius: 80% 15% 80% 20%;
+  background: linear-gradient(
+    135deg,
+    #fff2f9,
+    #f3bad5 45%,
+    #df8bb6
+  );
+  opacity: .55;
+  filter: blur(.15px);
+  animation: falling linear infinite;
+}
+
+.petal:nth-child(3n) {
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f7d5e7,
+    #e9a9ca
+  );
+  opacity: .45;
+}
+
+.petal:nth-child(4n) {
+  width: 9px;
+  height: 14px;
+  opacity: .35;
+}
+
+@keyframes falling {
+
+  0% {
+    transform: translate3d(0, -5vh, 0) rotate(0deg);
+  }
+
+  25% {
+    transform: translate3d(35px, 25vh, 0) rotate(100deg);
+  }
+
+  50% {
+    transform: translate3d(-20px, 50vh, 0) rotate(210deg);
+  }
+
+  75% {
+    transform: translate3d(30px, 75vh, 0) rotate(310deg);
+  }
+
+  100% {
+    transform: translate3d(-15px, 110vh, 0) rotate(420deg);
+  }
+
+}
+
+/* =================================
    PORTADA
-========================= */
+================================= */
 
 .hero {
-  min-height: 100vh;
+  min-height: 100svh;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -58,14 +130,14 @@ section {
   background:
     radial-gradient(
       ellipse at 50% 45%,
-      rgba(255,255,255,.38),
+      rgba(255,255,255,.30),
       transparent 48%
     ),
     linear-gradient(
       140deg,
-      #f2b3d0,
+      #f0b2cf,
       #e58bb5 50%,
-      #d97ca8
+      #d77ba8
     );
 }
 
@@ -76,8 +148,8 @@ section {
   width: 350px;
   height: 350px;
   border-radius: 50%;
-  background: rgba(255,255,255,.15);
-  filter: blur(55px);
+  background: rgba(255,255,255,.13);
+  filter: blur(60px);
   animation: float 12s ease-in-out infinite;
   pointer-events: none;
 }
@@ -108,87 +180,104 @@ section {
   text-transform: uppercase;
   font-size: 10px;
   color: #fffafc;
-}
-
-.hero .intro {
   position: relative;
   z-index: 2;
-  animation: fadeUp 2s ease both;
 }
 
-/* =========================
-   NOMBRE CRISTALINO
-========================= */
+/* =================================
+   DELFINA: PLATA CRISTALINA
+================================= */
 
 .name-wrap {
   position: relative;
   display: inline-block;
-  margin: 18px 0;
-  animation: nameFloat 6s ease-in-out infinite;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 12px;
+  margin: 22px 0;
+  animation: nameFloat 7s ease-in-out infinite;
 }
 
 .name {
   position: relative;
+  display: block;
+  width: 100%;
   font-family: 'Great Vibes', cursive;
-  font-size: clamp(90px, 19vw, 180px);
-  line-height: 1;
+  font-size: clamp(68px, 17vw, 145px);
+  line-height: 1.15;
+  white-space: nowrap;
+  text-align: center;
   color: transparent;
 
-  background-image:
-    radial-gradient(
-      circle,
-      rgba(255,255,255,.98) 0 1px,
-      transparent 1.7px
-    ),
-    radial-gradient(
-      circle,
-      rgba(100,100,115,.85) 0 .8px,
-      transparent 1.6px
-    ),
+  background:
     linear-gradient(
-      110deg,
-      #777780 0%,
-      #ffffff 15%,
-      #bfc0c8 25%,
-      #ffffff 38%,
-      #85858e 48%,
-      #ffffff 63%,
-      #b9bac3 78%,
-      #ffffff 90%,
-      #777780 100%
+      115deg,
+      #777983 0%,
+      #ffffff 12%,
+      #bfc2cc 23%,
+      #ffffff 35%,
+      #8b8e99 48%,
+      #fefeff 60%,
+      #c3c5cf 73%,
+      #ffffff 86%,
+      #7e818b 100%
     );
 
-  background-size:
-    4px 4px,
-    6px 6px,
-    250% 100%;
+  background-size: 250% 100%;
+  background-position: 100% 50%;
 
-  background-position:
-    0 0,
-    2px 2px,
-    100% 50%;
-
-  background-clip: text;
   -webkit-background-clip: text;
+  background-clip: text;
 
-  filter: drop-shadow(0 3px 2px rgba(125,85,112,.25));
+  filter:
+    drop-shadow(0 2px 1px rgba(115,80,105,.2))
+    drop-shadow(0 0 7px rgba(255,255,255,.25));
 
-  animation: silverShine 7s linear infinite;
+  animation: crystalShine 8s ease-in-out infinite;
 }
 
-@keyframes silverShine {
-  0% {
-    background-position:
-      0 0,
-      2px 2px,
-      100% 50%;
+/* Reflejo suave adicional */
+
+.name::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(255,255,255,.75) 45%,
+    rgba(255,255,255,.08) 52%,
+    transparent 70%
+  );
+
+  background-size: 250% 100%;
+  background-position: -150% 0;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  animation: crystalSweep 7s ease-in-out infinite;
+}
+
+@keyframes crystalShine {
+  0%, 100% {
+    background-position: 100% 50%;
   }
 
-  100% {
-    background-position:
-      0 0,
-      2px 2px,
-      -150% 50%;
+  50% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes crystalSweep {
+  0%, 20% {
+    background-position: -150% 0;
+  }
+
+  70%, 100% {
+    background-position: 150% 0;
   }
 }
 
@@ -198,7 +287,7 @@ section {
   }
 
   50% {
-    transform: translateY(-8px);
+    transform: translateY(-7px);
   }
 }
 
@@ -209,6 +298,8 @@ section {
   letter-spacing: 12px;
   margin-top: 10px;
   text-shadow: 0 2px 15px rgba(255,255,255,.4);
+  position: relative;
+  z-index: 2;
 }
 
 .subtitle {
@@ -216,6 +307,8 @@ section {
   font-size: 11px;
   letter-spacing: 3px;
   margin-top: 25px;
+  position: relative;
+  z-index: 2;
 }
 
 .button {
@@ -231,6 +324,8 @@ section {
   font-size: 11px;
   margin-top: 35px;
   transition: all .5s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .button:hover {
@@ -239,9 +334,9 @@ section {
   transform: translateY(-3px);
 }
 
-/* =========================
+/* =================================
    DESTELLOS
-========================= */
+================================= */
 
 .sparkle {
   position: absolute;
@@ -249,42 +344,31 @@ section {
   opacity: 0;
   pointer-events: none;
   animation: twinkle 4s ease-in-out infinite;
+  z-index: 2;
 }
 
-.sparkle:nth-child(1) {
+.sparkle:nth-of-type(1) {
   top: 20%;
   left: 18%;
   animation-delay: .2s;
 }
 
-.sparkle:nth-child(2) {
+.sparkle:nth-of-type(2) {
   top: 28%;
   right: 15%;
   animation-delay: 1.7s;
 }
 
-.sparkle:nth-child(3) {
+.sparkle:nth-of-type(3) {
   bottom: 25%;
   left: 12%;
   animation-delay: 2.4s;
 }
 
-.sparkle:nth-child(4) {
+.sparkle:nth-of-type(4) {
   bottom: 18%;
   right: 20%;
   animation-delay: .9s;
-}
-
-.sparkle:nth-child(5) {
-  top: 50%;
-  left: 8%;
-  animation-delay: 3s;
-}
-
-.sparkle:nth-child(6) {
-  top: 55%;
-  right: 8%;
-  animation-delay: 1.2s;
 }
 
 @keyframes twinkle {
@@ -307,21 +391,9 @@ section {
   }
 }
 
-@keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* =========================
-   SECCIONES
-========================= */
+/* =================================
+   SECCIONES GENERALES
+================================= */
 
 .section-title {
   font-family: 'Playfair Display', serif;
@@ -344,7 +416,7 @@ section {
   margin: 25px 0;
 }
 
-/* Invitación */
+/* INVITACIÓN */
 
 .invitation {
   background:
@@ -360,9 +432,104 @@ section {
     );
 }
 
-/* =========================
-   CONTADOR
-========================= */
+/* =================================
+   RSVP
+================================= */
+
+.rsvp {
+  background: linear-gradient(
+    135deg,
+    #e9a4c5,
+    #f1bdd6
+  );
+}
+
+.rsvp .section-title {
+  color: white;
+}
+
+.rsvp .intro {
+  color: #fffafc;
+}
+
+form {
+  max-width: 500px;
+  margin: 30px auto 0;
+  padding: 30px;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 25px;
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 15px 45px rgba(160,85,125,.08);
+}
+
+label {
+  display: block;
+  margin: 18px 0 8px;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid #e7bfd4;
+  background: #fffafd;
+  font-family: inherit;
+  color: var(--text);
+  outline: none;
+  transition: border .3s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--pink-deep);
+}
+
+textarea {
+  resize: vertical;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background: var(--pink);
+  color: white;
+  font-family: inherit;
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 25px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+.submit-button:hover {
+  background: var(--pink-deep);
+  transform: translateY(-2px);
+}
+
+.submit-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+#status {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 15px;
+  line-height: 1.7;
+}
+
+/* =================================
+   CUENTA REGRESIVA
+================================= */
 
 .countdown {
   background: linear-gradient(
@@ -410,9 +577,9 @@ section {
   letter-spacing: 2px;
 }
 
-/* =========================
-   DETALLES DEL EVENTO
-========================= */
+/* =================================
+   DETALLES
+================================= */
 
 .details {
   background: #fff9fc;
@@ -458,9 +625,53 @@ section {
   transform: translateY(-2px);
 }
 
-/* =========================
-   GALERÍA
-========================= */
+/* =================================
+   REGALO
+================================= */
+
+.gift {
+  background: linear-gradient(
+    180deg,
+    #fff4fa,
+    #f9ddeb
+  );
+}
+
+.gift-card {
+  max-width: 550px;
+  margin: 30px auto 0;
+  padding: 35px 25px;
+  border: 1px solid #ecc5da;
+  border-radius: 25px;
+  background: rgba(255,255,255,.65);
+}
+
+.gift-icon {
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.gift-button {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 15px 30px;
+  background: var(--pink);
+  color: white;
+  border-radius: 35px;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  transition: .4s;
+}
+
+.gift-button:hover {
+  background: var(--pink-deep);
+  transform: translateY(-3px);
+}
+
+/* =================================
+   GALERÍA: ÚLTIMA SECCIÓN
+================================= */
 
 .gallery {
   background: linear-gradient(
@@ -479,96 +690,17 @@ section {
   color: #c080a3;
 }
 
-/* =========================
-   CONFIRMACIONES
-========================= */
-
-.rsvp {
-  background: linear-gradient(
-    135deg,
-    #e9a4c5,
-    #f1bdd6
-  );
+.gallery-ending {
+  margin-top: 50px;
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-style: italic;
+  color: #cb6599;
 }
 
-.rsvp .section-title {
-  color: white;
-}
-
-.rsvp .intro {
-  color: #fffafc;
-}
-
-form {
-  max-width: 500px;
-  margin: 30px auto 0;
-  padding: 30px;
-  text-align: left;
-  border: 1px solid rgba(255,255,255,.7);
-  border-radius: 25px;
-  background: rgba(255,255,255,.72);
-}
-
-label {
-  display: block;
-  margin: 18px 0 8px;
-  font-size: 11px;
-  letter-spacing: 1px;
-}
-
-input,
-select,
-textarea {
-  width: 100%;
-  padding: 13px;
-  border-radius: 10px;
-  border: 1px solid #e7bfd4;
-  background: #fffafd;
-  font-family: inherit;
-  color: var(--text);
-}
-
-textarea {
-  resize: vertical;
-}
-
-.submit-button {
-  display: block;
-  width: 100%;
-  padding: 15px;
-  border: none;
-  border-radius: 30px;
-  background: var(--pink);
-  color: white;
-  font-family: inherit;
-  font-size: 11px;
-  letter-spacing: 2px;
-  margin-top: 25px;
-  cursor: pointer;
-  transition: .4s;
-}
-
-.submit-button:hover {
-  background: var(--pink-deep);
-}
-
-#status {
-  text-align: center;
-  font-size: 12px;
-  margin-top: 15px;
-}
-
-/* =========================
-   REGALO
-========================= */
-
-.gift {
-  background: #fff7fb;
-}
-
-/* =========================
+/* =================================
    PIE
-========================= */
+================================= */
 
 footer {
   background: #d77ea9;
@@ -577,22 +709,41 @@ footer {
   text-align: center;
 }
 
+footer .name-wrap {
+  margin: 15px auto;
+}
+
 footer .name {
-  font-size: 70px;
+  font-size: clamp(50px, 12vw, 75px);
 }
 
 footer p {
   font-size: 11px;
   letter-spacing: 2px;
+  margin: 8px 0;
 }
 
-/* =========================
-   CELULARES
-========================= */
+/* =================================
+   RESPONSIVE
+================================= */
 
 @media (max-width: 600px) {
+
   section {
     padding: 75px 20px;
+  }
+
+  .hero {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .name-wrap {
+    padding: 0 5px;
+  }
+
+  .hero .name {
+    font-size: clamp(70px, 21vw, 120px);
   }
 
   .count-box {
@@ -608,16 +759,17 @@ footer p {
     padding: 22px;
   }
 
-  .name {
-    font-size: 27vw;
+  .petal {
+    opacity: .4;
   }
 }
 
-/* =========================
-   ACCESIBILIDAD
-========================= */
+/* =================================
+   REDUCIR ANIMACIONES
+================================= */
 
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -625,18 +777,24 @@ footer p {
     animation-iteration-count: 1 !important;
     scroll-behavior: auto !important;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- PORTADA -->
+<!-- CONTENEDOR DE PÉTALOS -->
+
+<div class="petals-container" id="petals"></div>
+
+<!-- =================================
+     PORTADA
+================================= -->
 
 <section class="hero" id="inicio">
 
-  <span class="sparkle">✦</span>
-  <span class="sparkle">✧</span>
   <span class="sparkle">✦</span>
   <span class="sparkle">✧</span>
   <span class="sparkle">✦</span>
@@ -660,7 +818,9 @@ footer p {
 
 </section>
 
-<!-- INVITACIÓN -->
+<!-- =================================
+     INVITACIÓN
+================================= -->
 
 <section class="invitation" id="invitacion">
 
@@ -681,9 +841,7 @@ footer p {
   <div class="decor">✧ ♡ ✧</div>
 
   <div class="name-wrap">
-    <h2 class="name" style="font-size:85px">
-      Delfina
-    </h2>
+    <h2 class="name">Delfina</h2>
   </div>
 
   <div class="xv" style="color:#d58bb0">
@@ -692,106 +850,10 @@ footer p {
 
 </section>
 
-<!-- CUENTA REGRESIVA -->
-
-<section class="countdown">
-
-  <p class="intro">Cada vez falta menos</p>
-
-  <h2 class="section-title">
-    La cuenta regresiva
-  </h2>
-
-  <div class="count-grid">
-
-    <div class="count-box">
-      <strong id="days">00</strong>
-      <span>DÍAS</span>
-    </div>
-
-    <div class="count-box">
-      <strong id="hours">00</strong>
-      <span>HORAS</span>
-    </div>
-
-    <div class="count-box">
-      <strong id="minutes">00</strong>
-      <span>MINUTOS</span>
-    </div>
-
-    <div class="count-box">
-      <strong id="seconds">00</strong>
-      <span>SEGUNDOS</span>
-    </div>
-
-  </div>
-
-</section>
-
-<!-- DETALLES -->
-
-<section class="details">
-
-  <p class="intro" style="color:#c47da2">
-    Reservá la fecha
-  </p>
-
-  <h2 class="section-title">
-    Una noche para recordar
-  </h2>
-
-  <div class="detail">
-    <div class="detail-icon">♡</div>
-    <strong>FECHA</strong>
-    <p>19 de diciembre de 2026</p>
-  </div>
-
-  <div class="detail">
-    <div class="detail-icon">✧</div>
-    <strong>HORARIO</strong>
-    <p>21:00 hs</p>
-  </div>
-
-  <div class="detail">
-    <div class="detail-icon">⌖</div>
-    <strong>LUGAR</strong>
-    <p>Espacio Azalia</p>
-    <p>
-      Manuel Acevedo 440<br>
-      Lomas de Zamora
-    </p>
-
-    <a
-      class="map-button"
-      target="_blank"
-      rel="noopener"
-      href="https://www.google.com/maps/search/?api=1&query=Espacio+Azalia+Manuel+Acevedo+440+Lomas+de+Zamora"
-    >
-      ✧ CÓMO LLEGAR
-    </a>
-  </div>
-
-</section>
-
-<!-- GALERÍA -->
-
-<section class="gallery">
-
-  <p class="intro" style="color:#c47da2">
-    Mis recuerdos
-  </p>
-
-  <h2 class="section-title">
-    Un poquito de mí
-  </h2>
-
-  <div class="gallery-placeholder">
-    ✧ Pronto habrá recuerdos y fotografías especiales ✧
-  </div>
-
-</section>
-
-<!-- CONFIRMACIONES -->
+<!-- =================================
+     CONFIRMAR ASISTENCIA
+     POSICIÓN ELEVADA
+================================= -->
 
 <section class="rsvp" id="confirmacion">
 
@@ -857,13 +919,114 @@ footer p {
       ENVIAR CONFIRMACIÓN
     </button>
 
-    <p id="status"></p>
+    <p id="status" aria-live="polite"></p>
 
   </form>
 
 </section>
 
-<!-- REGALO -->
+<!-- =================================
+     CUENTA REGRESIVA
+================================= -->
+
+<section class="countdown">
+
+  <p class="intro">Cada vez falta menos</p>
+
+  <h2 class="section-title">
+    La cuenta regresiva
+  </h2>
+
+  <div class="count-grid">
+
+    <div class="count-box">
+      <strong id="days">00</strong>
+      <span>DÍAS</span>
+    </div>
+
+    <div class="count-box">
+      <strong id="hours">00</strong>
+      <span>HORAS</span>
+    </div>
+
+    <div class="count-box">
+      <strong id="minutes">00</strong>
+      <span>MINUTOS</span>
+    </div>
+
+    <div class="count-box">
+      <strong id="seconds">00</strong>
+      <span>SEGUNDOS</span>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- =================================
+     DETALLES DEL EVENTO
+================================= -->
+
+<section class="details">
+
+  <p class="intro" style="color:#c47da2">
+    Reservá la fecha
+  </p>
+
+  <h2 class="section-title">
+    Una noche para recordar
+  </h2>
+
+  <div class="detail">
+
+    <div class="detail-icon">♡</div>
+
+    <strong>FECHA</strong>
+
+    <p>19 de diciembre de 2026</p>
+
+  </div>
+
+  <div class="detail">
+
+    <div class="detail-icon">✧</div>
+
+    <strong>HORARIO</strong>
+
+    <p>21:00 hs</p>
+
+  </div>
+
+  <div class="detail">
+
+    <div class="detail-icon">⌖</div>
+
+    <strong>LUGAR</strong>
+
+    <p>Espacio Azalia</p>
+
+    <p>
+      Manuel Acevedo 440<br>
+      Lomas de Zamora
+    </p>
+
+    <a
+      class="map-button"
+      target="_blank"
+      rel="noopener"
+      href="https://www.google.com/maps/search/?api=1&query=Espacio+Azalia+Manuel+Acevedo+440+Lomas+de+Zamora"
+    >
+      ✧ CÓMO LLEGAR
+    </a>
+
+  </div>
+
+</section>
+
+<!-- =================================
+     REGALO
+     ANTES DE GALERÍA
+================================= -->
 
 <section class="gift">
 
@@ -872,35 +1035,71 @@ footer p {
   </p>
 
   <h2 class="section-title">
-    Tu presencia es mi regalo
+    Un regalo para Delfina
   </h2>
 
-  <p class="text">
-    Si además querés tener un detalle conmigo,
-    podés hacerlo desde acá. Gracias por formar parte
-    de este momento tan especial.
-  </p>
+  <div class="gift-card">
 
-  <a
-    href="#"
-    class="button"
-    id="giftButton"
-    style="color:#c47da2;border-color:#d9a8c3"
-  >
-    ♡ REGALAR A DELFINA ♡
-  </a>
+    <div class="gift-icon">♡</div>
+
+    <p class="text">
+      Tu presencia es mi regalo más especial.
+      Pero si además querés tener un detalle conmigo,
+      podés hacerlo desde acá.
+    </p>
+
+    <a
+      href="#"
+      class="gift-button"
+      id="giftButton"
+    >
+      ♡ REGALAR A DELFINA ♡
+    </a>
+
+  </div>
 
 </section>
 
-<!-- PIE -->
+<!-- =================================
+     GALERÍA
+     ÚLTIMO BLOQUE
+================================= -->
+
+<section class="gallery">
+
+  <p class="intro" style="color:#c47da2">
+    Mis recuerdos
+  </p>
+
+  <h2 class="section-title">
+    Un poquito de mí
+  </h2>
+
+  <div class="gallery-placeholder">
+    ✧ Pronto habrá recuerdos y fotografías especiales ✧
+  </div>
+
+  <div class="decor">
+    ♡ ✧ ♡
+  </div>
+
+  <p class="gallery-ending">
+    Gracias por ser parte de mi historia.
+  </p>
+
+</section>
+
+<!-- =================================
+     PIE
+================================= -->
 
 <footer>
 
   <p>Una noche mágica está por comenzar</p>
 
-  <h2 class="name">
-    Delfina
-  </h2>
+  <div class="name-wrap">
+    <h2 class="name">Delfina</h2>
+  </div>
 
   <p>MIS XV · 19.12.2026</p>
 
@@ -908,9 +1107,49 @@ footer p {
 
 <script>
 
-/* =========================
+/* =================================
+   PÉTALOS ANIMADOS
+================================= */
+
+(function createPetals() {
+
+  const container = document.getElementById("petals");
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (reducedMotion) return;
+
+  const petalCount = window.innerWidth < 600 ? 12 : 20;
+
+  for (let i = 0; i < petalCount; i++) {
+
+    const petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    petal.style.left = Math.random() * 100 + "%";
+
+    petal.style.animationDuration =
+      (12 + Math.random() * 15) + "s";
+
+    petal.style.animationDelay =
+      (-Math.random() * 25) + "s";
+
+    petal.style.transform =
+      `rotate(${Math.random() * 360}deg)`;
+
+    container.appendChild(petal);
+
+  }
+
+})();
+
+
+/* =================================
    CUENTA REGRESIVA
-========================= */
+================================= */
 
 const eventDate =
   new Date("2026-12-19T21:00:00-03:00").getTime();
@@ -921,7 +1160,7 @@ function updateCountdown() {
 
   if (distance <= 0) {
 
-    ["days","hours","minutes","seconds"].forEach(id => {
+    ["days", "hours", "minutes", "seconds"].forEach(id => {
       document.getElementById(id).textContent = "00";
     });
 
@@ -932,27 +1171,31 @@ function updateCountdown() {
     Math.floor(distance / 86400000);
 
   document.getElementById("hours").textContent =
-    String(Math.floor(distance / 3600000 % 24)).padStart(2,"0");
+    String(Math.floor(distance / 3600000 % 24)).padStart(2, "0");
 
   document.getElementById("minutes").textContent =
-    String(Math.floor(distance / 60000 % 60)).padStart(2,"0");
+    String(Math.floor(distance / 60000 % 60)).padStart(2, "0");
 
   document.getElementById("seconds").textContent =
-    String(Math.floor(distance / 1000 % 60)).padStart(2,"0");
+    String(Math.floor(distance / 1000 % 60)).padStart(2, "0");
+
 }
 
 updateCountdown();
+
 setInterval(updateCountdown, 1000);
 
 
-/* =========================
+/* =================================
    CONFIRMACIONES
-========================= */
+================================= */
 
 const form = document.getElementById("rsvpForm");
 const attendance = document.getElementById("asistencia");
 const people = document.getElementById("cantidad");
 const statusText = document.getElementById("status");
+const submitButton = form.querySelector(".submit-button");
+
 
 attendance.addEventListener("change", () => {
 
@@ -972,6 +1215,7 @@ attendance.addEventListener("change", () => {
 
 });
 
+
 form.addEventListener("submit", async (event) => {
 
   event.preventDefault();
@@ -982,13 +1226,16 @@ form.addEventListener("submit", async (event) => {
 
     asistencia: attendance.value,
 
-    cantidad: Number(people.value),
+    cantidad: attendance.value === "No"
+      ? 0
+      : Number(people.value),
 
     mensaje: document.getElementById("mensaje").value.trim()
 
   };
 
-  statusText.textContent = "Enviando...";
+  statusText.textContent = "Enviando confirmación ♡";
+  submitButton.disabled = true;
 
   try {
 
@@ -1016,16 +1263,20 @@ form.addEventListener("submit", async (event) => {
   } catch (error) {
 
     statusText.textContent =
-      "No pudimos enviar la respuesta. Intentá nuevamente.";
+      "No pudimos enviar tu respuesta. Intentá nuevamente.";
+
+  } finally {
+
+    submitButton.disabled = false;
 
   }
 
 });
 
 
-/* =========================
+/* =================================
    REGALO
-========================= */
+================================= */
 
 document.getElementById("giftButton").addEventListener("click", (event) => {
 
