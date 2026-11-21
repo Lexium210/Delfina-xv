@@ -1804,16 +1804,18 @@ document.getElementById("giftButton").addEventListener("click", async () => {
   const alias = "juramento.radiante";
   const feedback = document.getElementById("giftFeedback");
 
-  /* Abrir Mercado Pago usando un dominio reconocido por Android.
-     Se abre directamente desde el gesto del usuario para evitar bloqueos. */
-  window.open("https://www.mercadopago.com.ar/", "_blank");
-
+  /* Copia el alias y solicita a Android abrir Mercado Pago directamente
+     por paquete, en vez de navegar a su página web. Si la app no está
+     instalada, el Intent ofrece como alternativa la web oficial. */
   try {
     await navigator.clipboard.writeText(alias);
     feedback.textContent = "Alias copiado: juramento.radiante. Pegalo en Mercado Pago para enviar tu regalo. ¡Gracias por tu cariño! ♡";
   } catch (error) {
     feedback.textContent = "Alias para tu regalo: juramento.radiante. ¡Gracias por tu cariño! ♡";
   }
+
+  const mpIntent = "intent://www.mercadopago.com.ar/#Intent;scheme=https;package=com.mercadopago.wallet;S.browser_fallback_url=https%3A%2F%2Fwww.mercadopago.com.ar%2F;end";
+  window.location.href = mpIntent;
 
 });
 
