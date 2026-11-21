@@ -1804,11 +1804,15 @@ document.getElementById("giftButton").addEventListener("click", async () => {
   const alias = "juramento.radiante";
   const feedback = document.getElementById("giftFeedback");
 
+  /* Abrir Mercado Pago usando un dominio reconocido por Android.
+     Se abre directamente desde el gesto del usuario para evitar bloqueos. */
+  window.open("https://www.mercadopago.com.ar/", "_blank");
+
   try {
     await navigator.clipboard.writeText(alias);
-    feedback.textContent = "Alias copiado, gracias por tu cariño ♡";
+    feedback.textContent = "Alias copiado: juramento.radiante. Pegalo en Mercado Pago para enviar tu regalo. ¡Gracias por tu cariño! ♡";
   } catch (error) {
-    feedback.textContent = "Alias: juramento.radiante · Gracias por tu cariño ♡";
+    feedback.textContent = "Alias para tu regalo: juramento.radiante. ¡Gracias por tu cariño! ♡";
   }
 
 });
