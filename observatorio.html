@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -13,27 +14,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ==================================================
-   EL OBSERVATORIO — DELFINA XV
-================================================== */
-
 :root {
   --background: #151119;
   --background-soft: #1d1721;
-  --panel: rgba(37, 28, 40, 0.82);
-  --panel-hover: rgba(49, 37, 51, 0.95);
+  --panel: rgba(37, 28, 40, .86);
+  --panel-hover: rgba(49, 37, 51, .95);
 
   --rose: #c98d9e;
   --rose-light: #e6bdca;
   --gold: #c9ab75;
   --gold-soft: #8d7954;
 
+  --violet: #b6a0e8;
+  --violet-light: #d5c6f4;
+  --violet-soft: #8971bd;
+
   --text: #f1e9ec;
   --text-soft: #b6a8b2;
   --text-muted: #786b77;
 
-  --border: rgba(201, 171, 117, 0.16);
+  --border: rgba(201, 171, 117, .16);
 
   --success: #a5c5a8;
   --danger: #ce9298;
@@ -54,7 +54,7 @@ body {
   background:
     radial-gradient(
       circle at 50% 0%,
-      rgba(119, 73, 104, 0.17),
+      rgba(119, 73, 104, .17),
       transparent 40%
     ),
     var(--background);
@@ -65,8 +65,6 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
-
-/* Fondo celestial */
 
 body::before {
   content: "";
@@ -87,11 +85,91 @@ body::before {
   z-index: -1;
 }
 
+/* =========================================
+   PÉTALOS VIOLETES
+========================================= */
+
+.petals-container {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.petal {
+  position: absolute;
+  top: -80px;
+  left: var(--left);
+
+  width: var(--size);
+  height: calc(var(--size) * 1.45);
+
+  background: linear-gradient(
+    135deg,
+    rgba(210, 190, 245, .38),
+    rgba(151, 116, 202, .18) 50%,
+    rgba(115, 82, 163, .12)
+  );
+
+  border-radius: 80% 10% 80% 10%;
+  opacity: 0;
+
+  filter: blur(.2px);
+
+  animation:
+    petalFall var(--duration) linear var(--delay) infinite,
+    petalSway var(--sway) ease-in-out var(--delay) infinite alternate;
+
+  transform-origin: center;
+}
+
+.petal::after {
+  content: "";
+  position: absolute;
+  inset: 10% 48% 10% 48%;
+  background: rgba(221, 202, 248, .15);
+  border-radius: 50%;
+  filter: blur(1px);
+}
+
+@keyframes petalFall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: var(--opacity);
+  }
+
+  90% {
+    opacity: var(--opacity);
+  }
+
+  100% {
+    transform: translate3d(var(--drift), 115vh, 0) rotate(var(--rotation));
+    opacity: 0;
+  }
+}
+
+@keyframes petalSway {
+  0% {
+    margin-left: -15px;
+  }
+
+  100% {
+    margin-left: 15px;
+  }
+}
+
 /* Layout */
 
 .container {
   width: min(1180px, 92%);
   margin: auto;
+  position: relative;
+  z-index: 2;
 }
 
 header {
@@ -173,12 +251,7 @@ h1 span {
 .nav-button.active {
   color: var(--rose-light);
   border-color: var(--rose);
-  background: rgba(201, 141, 158, 0.08);
-}
-
-.nav-button.disabled {
-  opacity: .35;
-  cursor: not-allowed;
+  background: rgba(201, 141, 158, .08);
 }
 
 /* Secciones */
@@ -348,6 +421,205 @@ h1 span {
   color: var(--success);
 }
 
+/* Registro */
+
+.register-toolbar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 22px;
+}
+
+.search-box {
+  flex: 1;
+  min-width: 220px;
+}
+
+.search-box input,
+.filter-select {
+  width: 100%;
+  padding: 14px 16px;
+
+  background: rgba(25, 18, 28, .9);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  outline: none;
+  transition: .25s;
+}
+
+.search-box input:focus,
+.filter-select:focus {
+  border-color: var(--violet);
+}
+
+.search-box input::placeholder {
+  color: var(--text-muted);
+}
+
+.filter-select {
+  width: auto;
+  min-width: 180px;
+  cursor: pointer;
+}
+
+.filter-select option {
+  background: #201825;
+}
+
+.register-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+
+  color: var(--text-soft);
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.register-summary strong {
+  color: var(--violet-light);
+  font-weight: 500;
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.record-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+
+  transition: .3s;
+  animation: fadeIn .35s ease;
+  overflow: hidden;
+}
+
+.record-card:hover {
+  background: var(--panel-hover);
+  border-color: rgba(182,160,232,.35);
+  transform: translateY(-2px);
+}
+
+.record-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 15px;
+}
+
+.record-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 27px;
+  font-weight: 500;
+  color: var(--rose-light);
+  overflow-wrap: anywhere;
+}
+
+.record-date {
+  font-size: 9px;
+  color: var(--text-muted);
+  margin-top: 5px;
+}
+
+.attendance-badge {
+  padding: 7px 11px;
+  border-radius: 30px;
+  font-size: 9px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.attendance-badge.yes {
+  color: var(--success);
+  border: 1px solid rgba(165,197,168,.3);
+  background: rgba(165,197,168,.07);
+}
+
+.attendance-badge.no {
+  color: var(--danger);
+  border: 1px solid rgba(206,146,152,.3);
+  background: rgba(206,146,152,.07);
+}
+
+.record-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.record-detail {
+  padding: 8px 11px;
+  border-radius: 9px;
+  background: rgba(180,150,210,.06);
+  border: 1px solid rgba(180,150,210,.1);
+  color: var(--text-soft);
+  font-size: 10px;
+}
+
+.record-detail strong {
+  color: var(--violet-light);
+  font-weight: 500;
+}
+
+.record-message {
+  border-top: 1px solid rgba(201,171,117,.1);
+  padding-top: 13px;
+  margin-top: 10px;
+
+  color: var(--text-soft);
+  font-size: 11px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.record-message.empty {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+
+.empty-state .symbol {
+  color: var(--violet);
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.empty-state h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.empty-state p {
+  font-size: 11px;
+  color: var(--text-soft);
+  line-height: 1.8;
+}
+
 /* Archivo */
 
 .archive-grid {
@@ -405,31 +677,15 @@ h1 span {
   border-color: var(--gold);
 }
 
-/* Registro */
-
-.locked-panel {
-  text-align: center;
-  padding: 60px 25px;
+.action-button.violet {
+  border-color: rgba(182,160,232,.5);
+  color: var(--violet-light);
+  background: rgba(182,160,232,.05);
 }
 
-.lock-symbol {
-  font-size: 36px;
-  color: var(--gold);
-  margin-bottom: 25px;
-}
-
-.locked-panel h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 30px;
-  font-weight: 400;
-}
-
-.locked-panel p {
-  max-width: 520px;
-  margin: 15px auto;
-  font-size: 11px;
-  line-height: 2;
-  color: var(--text-soft);
+.action-button.violet:hover {
+  background: rgba(182,160,232,.13);
+  border-color: var(--violet);
 }
 
 /* Footer */
@@ -491,7 +747,6 @@ footer p {
 }
 
 @media (max-width: 600px) {
-
   header {
     padding-top: 35px;
   }
@@ -528,6 +783,10 @@ footer p {
     grid-template-columns: 1fr;
   }
 
+  .records-grid {
+    grid-template-columns: 1fr;
+  }
+
   .panel {
     padding: 20px;
   }
@@ -540,21 +799,49 @@ footer p {
     font-size: 10px;
     line-height: 1.8;
   }
+
+  .record-card {
+    padding: 18px;
+  }
+
+  .record-name {
+    font-size: 25px;
+  }
+
+  .filter-select {
+    width: 100%;
+  }
+
+  .search-box {
+    width: 100%;
+  }
 }
 
+/* Accesibilidad: reduce animaciones si el usuario lo prefiere */
+
+@media (prefers-reduced-motion: reduce) {
+  .petal {
+    animation: none;
+    display: none;
+  }
+
+  .section,
+  .record-card {
+    animation: none;
+  }
+}
 </style>
 </head>
 
 <body>
 
+<!-- Pétalos -->
+
+<div class="petals-container" id="petalsContainer"></div>
+
 <div class="container">
 
-<!-- ==================================================
-     ENCABEZADO
-================================================== -->
-
 <header>
-
   <div class="logo-symbol">✧</div>
 
   <div class="eyebrow">
@@ -570,13 +857,9 @@ footer p {
   </div>
 
   <div class="header-line"></div>
-
 </header>
 
-
-<!-- ==================================================
-     NAVEGACIÓN
-================================================== -->
+<!-- Navegación -->
 
 <nav class="navigation">
 
@@ -600,10 +883,7 @@ footer p {
 
 </nav>
 
-
-<!-- ==================================================
-     PANORAMA
-================================================== -->
+<!-- PANORAMA -->
 
 <section id="panorama" class="section active">
 
@@ -621,123 +901,58 @@ footer p {
 
   </div>
 
-
-  <!-- Estadísticas -->
-
   <div class="stats-grid">
 
     <div class="stat-card">
-
-      <div class="stat-label">
-        Respuestas recibidas
-      </div>
-
-      <div class="stat-value" id="respuestas">
-        —
-      </div>
-
-      <div class="stat-description">
-        Confirmaciones registradas
-      </div>
-
+      <div class="stat-label">Respuestas recibidas</div>
+      <div class="stat-value" id="respuestas">—</div>
+      <div class="stat-description">Confirmaciones registradas</div>
     </div>
 
-
     <div class="stat-card">
-
-      <div class="stat-label">
-        Asistencia confirmada
-      </div>
-
-      <div class="stat-value" id="confirmados">
-        —
-      </div>
-
-      <div class="stat-description">
-        Respuestas afirmativas
-      </div>
-
+      <div class="stat-label">Asistencia confirmada</div>
+      <div class="stat-value" id="confirmados">—</div>
+      <div class="stat-description">Respuestas afirmativas</div>
     </div>
 
-
     <div class="stat-card">
-
-      <div class="stat-label">
-        No asistirán
-      </div>
-
-      <div class="stat-value" id="ausentes">
-        —
-      </div>
-
-      <div class="stat-description">
-        Ausencias registradas
-      </div>
-
+      <div class="stat-label">No asistirán</div>
+      <div class="stat-value" id="ausentes">—</div>
+      <div class="stat-description">Ausencias registradas</div>
     </div>
 
-
     <div class="stat-card">
-
-      <div class="stat-label">
-        Personas confirmadas
-      </div>
-
-      <div class="stat-value" id="personas">
-        —
-      </div>
-
-      <div class="stat-description">
-        Total de asistentes declarados
-      </div>
-
+      <div class="stat-label">Personas confirmadas</div>
+      <div class="stat-value" id="personas">—</div>
+      <div class="stat-description">Total de asistentes declarados</div>
     </div>
 
   </div>
-
-
-  <!-- Estado de conexión -->
 
   <div class="panel">
 
     <div class="status-row">
 
       <div class="status-indicator">
-
-        <span
-          id="statusDot"
-          class="status-dot loading">
-        </span>
-
-        <span id="statusText">
-          Estableciendo conexión...
-        </span>
-
+        <span id="statusDot" class="status-dot loading"></span>
+        <span id="statusText">Estableciendo conexión...</span>
       </div>
 
-      <div
-        class="last-update"
-        id="lastUpdate">
+      <div class="last-update" id="lastUpdate">
         Última actualización: —
       </div>
 
     </div>
 
-    <div
-      id="connectionMessage"
-      class="message-box">
-      El Observatorio está intentando establecer contacto con
-      el registro de confirmaciones.
+    <div id="connectionMessage" class="message-box">
+      El Observatorio está intentando establecer contacto con el registro de confirmaciones.
     </div>
 
   </div>
 
 </section>
 
-
-<!-- ==================================================
-     REGISTRO
-================================================== -->
+<!-- REGISTRO -->
 
 <section id="registro" class="section">
 
@@ -750,39 +965,70 @@ footer p {
     <h2>Registro</h2>
 
     <p>
-      El registro contiene información individual de los invitados.
+      Cada respuesta, cada nombre y cada señal de asistencia.
     </p>
 
   </div>
 
+  <div class="panel">
 
-  <div class="panel locked-panel">
+    <div class="register-toolbar">
 
-    <div class="lock-symbol">
-      ✧
+      <div class="search-box">
+        <input
+          type="search"
+          id="searchInput"
+          placeholder="Buscar por nombre o mensaje..."
+          oninput="renderRecords()"
+          autocomplete="off">
+      </div>
+
+      <select
+        class="filter-select"
+        id="attendanceFilter"
+        onchange="renderRecords()">
+
+        <option value="all">Todas las respuestas</option>
+        <option value="yes">Asistirán</option>
+        <option value="no">No asistirán</option>
+
+      </select>
+
     </div>
 
-    <h3>Archivo reservado</h3>
+    <div class="register-summary">
 
-    <p>
-      Los registros individuales se encuentran protegidos.
-      Este espacio estará disponible cuando se habilite un
-      sistema de acceso privado y seguro.
-    </p>
+      <span id="recordCount">
+        <strong>0</strong> registros
+      </span>
 
-    <p>
-      La información personal de los invitados no se expone
-      en el Observatorio público.
-    </p>
+      <span id="registerStatus">
+        Sincronizando...
+      </span>
+
+    </div>
+
+    <div id="recordsGrid" class="records-grid">
+
+      <div class="empty-state">
+
+        <div class="symbol">✧</div>
+
+        <h3>Consultando el registro</h3>
+
+        <p>
+          Las respuestas están viajando hacia el Observatorio.
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
 
 </section>
 
-
-<!-- ==================================================
-     ARCHIVO
-================================================== -->
+<!-- ARCHIVO -->
 
 <section id="archivo" class="section">
 
@@ -801,11 +1047,7 @@ footer p {
 
   </div>
 
-
   <div class="archive-grid">
-
-
-    <!-- Exportación -->
 
     <div class="archive-card">
 
@@ -820,18 +1062,31 @@ footer p {
         del Observatorio en formato CSV.
       </p>
 
-      <button
-        class="action-button"
-        onclick="exportCSV()">
-
+      <button class="action-button" onclick="exportStatsCSV()">
         ↓ Exportar estadísticas
-
       </button>
 
     </div>
 
+    <div class="archive-card">
 
-    <!-- Actualización -->
+      <div class="eyebrow">
+        Registro completo
+      </div>
+
+      <h3>Archivo de invitados</h3>
+
+      <p>
+        Descargar todas las respuestas recibidas, incluyendo
+        nombres, asistencia, cantidad de personas, mensajes
+        y fechas de registro.
+      </p>
+
+      <button class="action-button violet" onclick="exportRecordsCSV()">
+        ↓ Exportar registros
+      </button>
+
+    </div>
 
     <div class="archive-card">
 
@@ -843,34 +1098,22 @@ footer p {
 
       <p>
         Consultar nuevamente la fuente de datos para obtener
-        las estadísticas más recientes.
+        las estadísticas y respuestas más recientes.
       </p>
 
-      <button
-        class="action-button"
-        onclick="loadData()">
-
+      <button class="action-button" onclick="loadData()">
         ↻ Actualizar ahora
-
       </button>
 
     </div>
-
 
   </div>
 
 </section>
 
-
-<!-- ==================================================
-     PIE
-================================================== -->
-
 <footer>
 
-  <div class="footer-symbol">
-    ✧
-  </div>
+  <div class="footer-symbol">✧</div>
 
   <p>
     Cada estrella cuenta una historia.
@@ -884,11 +1127,6 @@ footer p {
 
 </div>
 
-
-<!-- ==================================================
-     JAVASCRIPT
-================================================== -->
-
 <script>
 
 /* ================================================
@@ -896,10 +1134,54 @@ footer p {
 ================================================ */
 
 const API_URL =
-"https://script.google.com/macros/s/AKfycbyB-oVeT_ZHFKbie_4lXm-OcO4D3iisAvNhNTUSdYYSJvUaVy3dam1HeHBfoeMWOXGW/exec";
-
+"https://script.google.com/macros/s/AKfycbymMbamI4Qmjtxh_iUzd_P1zCCJrtRn-KQSA40mi-RqEv3YIuHd1_X243CHkpbHkI90/exec";
 
 let lastStats = null;
+let lastRegistros = [];
+
+
+/* ================================================
+   PÉTALOS
+================================================ */
+
+function createPetals() {
+
+  const container = document.getElementById("petalsContainer");
+
+  // Reducimos la cantidad en dispositivos pequeños
+  const count = window.innerWidth < 600 ? 9 : 16;
+
+  for (let i = 0; i < count; i++) {
+
+    const petal = document.createElement("div");
+
+    petal.className = "petal";
+
+    const size = Math.random() * 10 + 8;
+    const duration = Math.random() * 20 + 35;
+    const sway = Math.random() * 8 + 8;
+    const delay = -Math.random() * duration;
+
+    const drift = (Math.random() * 240 - 120) + "px";
+    const rotation = (Math.random() * 900 - 450) + "deg";
+    const opacity = Math.random() * .18 + .08;
+
+    petal.style.setProperty("--left", Math.random() * 100 + "%");
+    petal.style.setProperty("--size", size + "px");
+    petal.style.setProperty("--duration", duration + "s");
+    petal.style.setProperty("--sway", sway + "s");
+    petal.style.setProperty("--delay", delay + "s");
+    petal.style.setProperty("--drift", drift);
+    petal.style.setProperty("--rotation", rotation);
+    petal.style.setProperty("--opacity", opacity);
+
+    container.appendChild(petal);
+
+  }
+
+}
+
+createPetals();
 
 
 /* ================================================
@@ -941,21 +1223,26 @@ function setConnectionState(state, message) {
   dot.className = "status-dot";
 
   if (state === "loading") {
+
     dot.classList.add("loading");
     text.textContent = "Consultando el registro...";
+
   }
 
   else if (state === "success") {
-    text.textContent = "Conexión establecida";
+
+    text.textContent = "Conexión estable";
+
   }
 
   else if (state === "error") {
+
     dot.classList.add("error");
     text.textContent = "Conexión interrumpida";
+
   }
 
   box.textContent = message;
-
   box.className = "message-box";
 
   if (state === "error") {
@@ -980,6 +1267,9 @@ async function loadData() {
     "El Observatorio está consultando el registro de confirmaciones."
   );
 
+  document.getElementById("registerStatus").textContent =
+    "Sincronizando...";
+
   try {
 
     const response = await fetch(API_URL, {
@@ -997,16 +1287,23 @@ async function loadData() {
       throw new Error("Respuesta de datos inválida");
     }
 
-    const stats = data.stats;
+    lastStats = data.stats;
 
-    lastStats = stats;
+    lastRegistros = Array.isArray(data.registros)
+      ? data.registros
+      : [];
 
-    updateNumber("respuestas", stats.respuestas);
-    updateNumber("confirmados", stats.confirmados);
-    updateNumber("ausentes", stats.ausentes);
-    updateNumber("personas", stats.personasConfirmadas);
+    updateNumber("respuestas", data.stats.respuestas);
+    updateNumber("confirmados", data.stats.confirmados);
+    updateNumber("ausentes", data.stats.ausentes);
+    updateNumber("personas", data.stats.personasConfirmadas);
 
     updateTimestamp(data.updated);
+
+    renderRecords();
+
+    document.getElementById("registerStatus").textContent =
+      "Registro sincronizado";
 
     setConnectionState(
       "success",
@@ -1019,10 +1316,16 @@ async function loadData() {
 
     console.error("Observatorio:", error);
 
+    document.getElementById("registerStatus").textContent =
+      "No fue posible actualizar";
+
     setConnectionState(
       "error",
       "No fue posible consultar los datos. Si el problema persiste, puede deberse a la conexión o a restricciones del servicio."
     );
+
+    // Si ya teníamos datos, los conservamos en pantalla.
+    renderRecords();
 
   }
 
@@ -1049,7 +1352,7 @@ function updateNumber(id, value) {
     return;
   }
 
-  const start = Number(element.textContent) || 0;
+  const start = Number(element.textContent.replace(/\D/g, "")) || 0;
   const duration = 700;
   const startTime = performance.now();
 
@@ -1103,43 +1406,241 @@ function updateTimestamp(timestamp) {
     "Última actualización: " +
     date.toLocaleString("es-AR", {
       dateStyle: "short",
-      timeStyle: "short"
+      timeStyle: "short",
+      timeZone: "America/Argentina/Buenos_Aires"
     });
 
 }
 
 
 /* ================================================
-   EXPORTAR CSV
+   FORMATEO DE FECHAS DE REGISTRO
 ================================================ */
 
-function exportCSV() {
+function formatRecordDate(value) {
 
-  if (!lastStats) {
+  if (!value) return "Fecha desconocida";
 
-    alert(
-      "Todavía no hay datos disponibles para exportar."
+  const date = new Date(value);
+
+  if (isNaN(date.getTime())) {
+    return String(value);
+  }
+
+  return date.toLocaleString("es-AR", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "America/Argentina/Buenos_Aires"
+  });
+
+}
+
+
+/* ================================================
+   NORMALIZACIÓN
+================================================ */
+
+function normalizeAttendance(value) {
+
+  const normalized = String(value || "")
+    .trim()
+    .toLowerCase();
+
+  if (
+    normalized === "si" ||
+    normalized === "sí" ||
+    normalized === "yes" ||
+    normalized === "true"
+  ) {
+    return "yes";
+  }
+
+  return "no";
+
+}
+
+
+/* ================================================
+   RENDERIZAR REGISTROS
+================================================ */
+
+function renderRecords() {
+
+  const grid = document.getElementById("recordsGrid");
+  const search = document.getElementById("searchInput").value
+    .trim()
+    .toLowerCase();
+
+  const filter = document.getElementById("attendanceFilter").value;
+
+  let records = [...lastRegistros];
+
+  // Filtro por asistencia
+
+  if (filter !== "all") {
+
+    records = records.filter(record =>
+      normalizeAttendance(record.asistencia) === filter
     );
+
+  }
+
+  // Búsqueda
+
+  if (search) {
+
+    records = records.filter(record => {
+
+      const name = String(record.nombre || "").toLowerCase();
+      const message = String(record.mensaje || "").toLowerCase();
+
+      return name.includes(search) || message.includes(search);
+
+    });
+
+  }
+
+  // Orden cronológico inverso
+
+  records.sort((a, b) => {
+
+    const dateA = new Date(a.fecha).getTime() || 0;
+    const dateB = new Date(b.fecha).getTime() || 0;
+
+    return dateB - dateA;
+
+  });
+
+  document.getElementById("recordCount").innerHTML =
+    "<strong>" + records.length.toLocaleString("es-AR") +
+    "</strong> registros";
+
+  if (records.length === 0) {
+
+    grid.innerHTML = `
+      <div class="empty-state">
+
+        <div class="symbol">✧</div>
+
+        <h3>No encontramos registros</h3>
+
+        <p>
+          No hay respuestas que coincidan con los filtros seleccionados.
+        </p>
+
+      </div>
+    `;
 
     return;
 
   }
 
-  const rows = [
-    ["Indicador", "Valor"],
-    ["Respuestas recibidas", lastStats.respuestas],
-    ["Confirmados", lastStats.confirmados],
-    ["Ausentes", lastStats.ausentes],
-    ["Personas confirmadas", lastStats.personasConfirmadas]
-  ];
+  grid.innerHTML = records.map(record => {
+
+    const attending = normalizeAttendance(record.asistencia) === "yes";
+
+    const attendanceText = attending
+      ? "Asistirá"
+      : "No asistirá";
+
+    const badgeClass = attending
+      ? "yes"
+      : "no";
+
+    const quantity = Number(record.cantidad) || 0;
+
+    const message = String(record.mensaje || "").trim();
+
+    return `
+
+      <article class="record-card">
+
+        <div class="record-header">
+
+          <div>
+
+            <div class="record-name">
+              ${escapeHTML(record.nombre || "Sin nombre")}
+            </div>
+
+            <div class="record-date">
+              ${escapeHTML(formatRecordDate(record.fecha))}
+            </div>
+
+          </div>
+
+          <span class="attendance-badge ${badgeClass}">
+            ${attendanceText}
+          </span>
+
+        </div>
+
+        <div class="record-details">
+
+          <div class="record-detail">
+            Personas:
+            <strong>${quantity}</strong>
+          </div>
+
+          <div class="record-detail">
+            Respuesta:
+            <strong>${attending ? "Sí" : "No"}</strong>
+          </div>
+
+        </div>
+
+        <div class="record-message ${message ? "" : "empty"}">
+
+          ${
+            message
+              ? escapeHTML(message)
+              : "Sin mensaje adicional."
+          }
+
+        </div>
+
+      </article>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* ================================================
+   SEGURIDAD: ESCAPAR HTML
+================================================ */
+
+function escapeHTML(value) {
+
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* ================================================
+   CSV GENERAL
+================================================ */
+
+function csvEscape(value) {
+
+  return '"' +
+    String(value ?? "").replace(/"/g, '""') +
+    '"';
+
+}
+
+function downloadCSV(rows, filename) {
 
   const csv = rows
-    .map(row =>
-      row.map(value =>
-        '"' + String(value).replace(/"/g, '""') + '"'
-      ).join(",")
-    )
-    .join("\n");
+    .map(row => row.map(csvEscape).join(","))
+    .join("\r\n");
 
   const blob = new Blob(
     ["\uFEFF" + csv],
@@ -1148,22 +1649,105 @@ function exportCSV() {
     }
   );
 
+  const url = URL.createObjectURL(blob);
+
   const link = document.createElement("a");
 
-  link.href = URL.createObjectURL(blob);
-
-  link.download =
-    "observatorio_delfina_xv_" +
-    new Date().toISOString().slice(0,10) +
-    ".csv";
+  link.href = url;
+  link.download = filename;
 
   document.body.appendChild(link);
-
   link.click();
-
   document.body.removeChild(link);
 
-  URL.revokeObjectURL(link.href);
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+
+}
+
+
+/* ================================================
+   EXPORTAR ESTADÍSTICAS
+================================================ */
+
+function exportStatsCSV() {
+
+  if (!lastStats) {
+
+    alert("Todavía no hay datos disponibles para exportar.");
+    return;
+
+  }
+
+  const rows = [
+
+    ["Indicador", "Valor"],
+
+    ["Respuestas recibidas", lastStats.respuestas],
+    ["Confirmados", lastStats.confirmados],
+    ["Ausentes", lastStats.ausentes],
+    ["Personas confirmadas", lastStats.personasConfirmadas],
+
+    ["Fecha de exportación", new Date().toLocaleString("es-AR")]
+
+  ];
+
+  downloadCSV(
+    rows,
+    "observatorio_estadisticas_" +
+    new Date().toISOString().slice(0,10) +
+    ".csv"
+  );
+
+}
+
+
+/* ================================================
+   EXPORTAR REGISTROS
+================================================ */
+
+function exportRecordsCSV() {
+
+  if (!lastRegistros || lastRegistros.length === 0) {
+
+    alert("Todavía no hay registros disponibles para exportar.");
+    return;
+
+  }
+
+  const rows = [
+
+    [
+      "Fecha",
+      "Nombre",
+      "Asistencia",
+      "Cantidad de personas",
+      "Mensaje"
+    ]
+
+  ];
+
+  lastRegistros.forEach(record => {
+
+    rows.push([
+
+      record.fecha || "",
+      record.nombre || "",
+      normalizeAttendance(record.asistencia) === "yes"
+        ? "Sí"
+        : "No",
+      record.cantidad ?? "",
+      record.mensaje || ""
+
+    ]);
+
+  });
+
+  downloadCSV(
+    rows,
+    "observatorio_registros_" +
+    new Date().toISOString().slice(0,10) +
+    ".csv"
+  );
 
 }
 
