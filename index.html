@@ -1260,6 +1260,68 @@ footer p {
   .scroll-floor-button { transition: none; }
 }
 
+/* ==========================================
+   MENSAJE — SEMILLA DEL FIRMAMENTO
+========================================== */
+.message-seed {
+  max-width: 500px;
+  margin: 22px auto 8px;
+  padding: 15px 18px;
+  border: 1px solid rgba(212,175,55,.42);
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(255,250,253,.72), rgba(255,242,249,.92));
+  box-shadow: 0 8px 24px rgba(169,128,28,.08);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.message-seed-icon {
+  flex: 0 0 38px;
+  width: 38px; height: 38px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  color: #a98218;
+  background: rgba(247,231,161,.35);
+  font-size: 18px;
+  animation: seedGlow 3.4s ease-in-out infinite;
+}
+.message-seed-copy { display: flex; flex-direction: column; gap: 4px; }
+.message-seed-title {
+  color: #a98218;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+}
+.message-seed-text {
+  color: #81566e;
+  font-size: 11px;
+  line-height: 1.7;
+}
+.message-label-wrap {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 7px;
+}
+.message-important {
+  display: inline-flex; align-items: center; gap: 5px;
+  color: #a98218; font-size: 9px; font-weight: 600;
+  letter-spacing: .7px; white-space: nowrap;
+}
+.message-important .spark { animation: seedGlow 2.8s ease-in-out infinite; }
+@keyframes seedGlow {
+  0%,100% { opacity: .72; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+@media (max-width: 600px) {
+  .message-seed { padding: 13px 14px; gap: 10px; }
+  .message-seed-icon { width: 34px; height: 34px; flex-basis: 34px; }
+  .message-important { font-size: 8px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .message-seed-icon, .message-important .spark { animation: none; }
+}
+
 </style>
 </head>
 
@@ -1405,14 +1467,23 @@ footer p {
       required
     >
 
-    <label for="mensaje">
-      Un mensaje para Delfina (opcional)
+    <div class="message-seed" aria-label="Aviso: tu mensaje es muy importante">
+      <div class="message-seed-icon" aria-hidden="true">✧</div>
+      <div class="message-seed-copy">
+        <span class="message-seed-title">Psst... spoiler: esto es MUY importante</span>
+        <span class="message-seed-text">Hay algo que estamos preparando con las palabras de quienes nos acompañan. Dejá un deseo, un recuerdo, un consejo o simplemente algo que quieras decirle a Delfina.</span>
+      </div>
+    </div>
+
+    <label class="message-label-wrap" for="mensaje">
+      <span>Un mensaje para Delfina (opcional)</span>
+      <span class="message-important"><span class="spark">✦</span> MUY IMPORTANTE</span>
     </label>
 
     <textarea
       id="mensaje"
-      rows="3"
-      placeholder="Dejá unas palabras..."
+      rows="4"
+      placeholder="Escribí algo que Delfina pueda guardar..."
     ></textarea>
 
     <button class="submit-button" type="submit">
