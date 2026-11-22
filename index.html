@@ -1990,9 +1990,10 @@ giftButton.addEventListener("click", async () => {
   let atEnd = false;
 
   function updateState() {
-    const scrollPosition = window.scrollY + window.innerHeight * 0.35;
-    const lastFloor = floors[floors.length - 1];
-    atEnd = scrollPosition >= lastFloor.offsetTop;
+    // Detecta el final real de la página, no el comienzo del footer:
+    // en móviles o con un footer corto, el umbral anterior podía ser inalcanzable.
+    const pageBottom = document.documentElement.scrollHeight;
+    atEnd = window.scrollY + window.innerHeight >= pageBottom - 24;
     icon.innerHTML = atEnd ? upSvg : downSvg;
     button.setAttribute("aria-label", atEnd ? "Volver al inicio" : "Ir al siguiente segmento");
   }
