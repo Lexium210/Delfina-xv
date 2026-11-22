@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17121b">
+
+<title>El Observatorio · Delfina XV</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ==================================================
+   EL OBSERVATORIO — DELFINA XV
+================================================== */
+
+:root {
+  --background: #151119;
+  --background-soft: #1d1721;
+  --panel: rgba(37, 28, 40, 0.82);
+  --panel-hover: rgba(49, 37, 51, 0.95);
+
+  --rose: #c98d9e;
+  --rose-light: #e6bdca;
+  --gold: #c9ab75;
+  --gold-soft: #8d7954;
+
+  --text: #f1e9ec;
+  --text-soft: #b6a8b2;
+  --text-muted: #786b77;
+
+  --border: rgba(201, 171, 117, 0.16);
+
+  --success: #a5c5a8;
+  --danger: #ce9298;
+
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(119, 73, 104, 0.17),
+      transparent 40%
+    ),
+    var(--background);
+
+  color: var(--text);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Fondo celestial */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: .35;
+
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, #e8d7bd 100%, transparent),
+    radial-gradient(1px 1px at 25% 70%, #e8d7bd 100%, transparent),
+    radial-gradient(1px 1px at 50% 30%, #e8d7bd 100%, transparent),
+    radial-gradient(2px 2px at 70% 15%, #e8d7bd 100%, transparent),
+    radial-gradient(1px 1px at 85% 60%, #e8d7bd 100%, transparent),
+    radial-gradient(1px 1px at 40% 90%, #e8d7bd 100%, transparent),
+    radial-gradient(2px 2px at 90% 90%, #e8d7bd 100%, transparent);
+
+  z-index: -1;
+}
+
+/* Layout */
+
+.container {
+  width: min(1180px, 92%);
+  margin: auto;
+}
+
+header {
+  padding: 45px 0 30px;
+  text-align: center;
+}
+
+.logo-symbol {
+  color: var(--gold);
+  font-size: 25px;
+  margin-bottom: 12px;
+  opacity: .85;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: .95;
+  margin: 15px 0;
+  letter-spacing: 1px;
+}
+
+h1 span {
+  color: var(--rose);
+}
+
+.subtitle {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--text-soft);
+  margin-top: 18px;
+}
+
+.header-line {
+  width: 90px;
+  height: 1px;
+  margin: 28px auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold),
+    transparent
+  );
+}
+
+/* Navegación */
+
+.navigation {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 35px auto 45px;
+}
+
+.nav-button {
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: transparent;
+  color: var(--text-soft);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  color: var(--rose-light);
+  border-color: var(--rose);
+  background: rgba(201, 141, 158, 0.08);
+}
+
+.nav-button.disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+/* Secciones */
+
+.section {
+  display: none;
+  animation: fadeIn .6s ease;
+}
+
+.section.active {
+  display: block;
+}
+
+.section-heading {
+  margin-bottom: 35px;
+}
+
+.section-heading h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 38px;
+  font-weight: 400;
+  margin: 0 0 10px;
+}
+
+.section-heading p {
+  font-size: 11px;
+  color: var(--text-soft);
+  letter-spacing: 1px;
+  line-height: 1.8;
+}
+
+/* Estadísticas */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.stat-card {
+  position: relative;
+  padding: 30px 25px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(10px);
+  transition: transform .3s, border-color .3s;
+  overflow: hidden;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(201,171,117,.4);
+}
+
+.stat-card::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  right: -40px;
+  bottom: -50px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(201,141,158,.1),
+    transparent 70%
+  );
+}
+
+.stat-label {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.stat-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  color: var(--rose-light);
+  font-weight: 500;
+  line-height: 1;
+  margin: 22px 0 15px;
+}
+
+.stat-description {
+  font-size: 10px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* Panel */
+
+.panel {
+  margin-top: 25px;
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.panel-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: var(--text-soft);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 10px rgba(165,197,168,.4);
+}
+
+.status-dot.error {
+  background: var(--danger);
+  box-shadow: 0 0 10px rgba(206,146,152,.3);
+}
+
+.status-dot.loading {
+  background: var(--gold);
+  animation: pulse 1.2s infinite;
+}
+
+.last-update {
+  color: var(--text-muted);
+  font-size: 10px;
+}
+
+/* Mensajes */
+
+.message-box {
+  margin-top: 20px;
+  padding: 15px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-soft);
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.message-box.error {
+  border-color: rgba(206,146,152,.3);
+  color: var(--danger);
+}
+
+.message-box.success {
+  color: var(--success);
+}
+
+/* Archivo */
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.archive-card {
+  padding: 28px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.archive-card h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.archive-card p {
+  color: var(--text-soft);
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+.action-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 13px 20px;
+  margin-top: 15px;
+
+  border: 1px solid var(--gold-soft);
+  border-radius: 50px;
+
+  background: rgba(201,171,117,.06);
+  color: var(--gold);
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+  transition: .3s;
+}
+
+.action-button:hover {
+  background: rgba(201,171,117,.14);
+  border-color: var(--gold);
+}
+
+/* Registro */
+
+.locked-panel {
+  text-align: center;
+  padding: 60px 25px;
+}
+
+.lock-symbol {
+  font-size: 36px;
+  color: var(--gold);
+  margin-bottom: 25px;
+}
+
+.locked-panel h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 30px;
+  font-weight: 400;
+}
+
+.locked-panel p {
+  max-width: 520px;
+  margin: 15px auto;
+  font-size: 11px;
+  line-height: 2;
+  color: var(--text-soft);
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  padding: 70px 20px 40px;
+}
+
+.footer-symbol {
+  color: var(--gold);
+  opacity: .6;
+  font-size: 18px;
+}
+
+footer p {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--text-muted);
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.footer-small {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+/* Animaciones */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .3;
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+
+  header {
+    padding-top: 35px;
+  }
+
+  .navigation {
+    gap: 6px;
+    margin: 30px auto;
+  }
+
+  .nav-button {
+    padding: 11px 16px;
+    font-size: 9px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 22px 17px;
+  }
+
+  .stat-value {
+    font-size: 43px;
+  }
+
+  .stat-label {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+  }
+
+  .archive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+
+  .section-heading h2 {
+    font-size: 33px;
+  }
+
+  .subtitle {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ==================================================
+     ENCABEZADO
+================================================== -->
+
+<header>
+
+  <div class="logo-symbol">✧</div>
+
+  <div class="eyebrow">
+    Delfina · XV años
+  </div>
+
+  <h1>
+    El <span>Observatorio</span>
+  </h1>
+
+  <div class="subtitle">
+    Un espacio para contemplar lo que está por venir
+  </div>
+
+  <div class="header-line"></div>
+
+</header>
+
+
+<!-- ==================================================
+     NAVEGACIÓN
+================================================== -->
+
+<nav class="navigation">
+
+  <button
+    class="nav-button active"
+    onclick="showSection('panorama', this)">
+    Panorama
+  </button>
+
+  <button
+    class="nav-button"
+    onclick="showSection('registro', this)">
+    Registro
+  </button>
+
+  <button
+    class="nav-button"
+    onclick="showSection('archivo', this)">
+    Archivo
+  </button>
+
+</nav>
+
+
+<!-- ==================================================
+     PANORAMA
+================================================== -->
+
+<section id="panorama" class="section active">
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      Estado de la celebración
+    </div>
+
+    <h2>Panorama general</h2>
+
+    <p>
+      Las señales de la celebración, reunidas en un mismo lugar.
+    </p>
+
+  </div>
+
+
+  <!-- Estadísticas -->
+
+  <div class="stats-grid">
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Respuestas recibidas
+      </div>
+
+      <div class="stat-value" id="respuestas">
+        —
+      </div>
+
+      <div class="stat-description">
+        Confirmaciones registradas
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Asistencia confirmada
+      </div>
+
+      <div class="stat-value" id="confirmados">
+        —
+      </div>
+
+      <div class="stat-description">
+        Respuestas afirmativas
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        No asistirán
+      </div>
+
+      <div class="stat-value" id="ausentes">
+        —
+      </div>
+
+      <div class="stat-description">
+        Ausencias registradas
+      </div>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <div class="stat-label">
+        Personas confirmadas
+      </div>
+
+      <div class="stat-value" id="personas">
+        —
+      </div>
+
+      <div class="stat-description">
+        Total de asistentes declarados
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- Estado de conexión -->
+
+  <div class="panel">
+
+    <div class="status-row">
+
+      <div class="status-indicator">
+
+        <span
+          id="statusDot"
+          class="status-dot loading">
+        </span>
+
+        <span id="statusText">
+          Estableciendo conexión...
+        </span>
+
+      </div>
+
+      <div
+        class="last-update"
+        id="lastUpdate">
+        Última actualización: —
+      </div>
+
+    </div>
+
+    <div
+      id="connectionMessage"
+      class="message-box">
+      El Observatorio está intentando establecer contacto con
+      el registro de confirmaciones.
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     REGISTRO
+================================================== -->
+
+<section id="registro" class="section">
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      Datos de la celebración
+    </div>
+
+    <h2>Registro</h2>
+
+    <p>
+      El registro contiene información individual de los invitados.
+    </p>
+
+  </div>
+
+
+  <div class="panel locked-panel">
+
+    <div class="lock-symbol">
+      ✧
+    </div>
+
+    <h3>Archivo reservado</h3>
+
+    <p>
+      Los registros individuales se encuentran protegidos.
+      Este espacio estará disponible cuando se habilite un
+      sistema de acceso privado y seguro.
+    </p>
+
+    <p>
+      La información personal de los invitados no se expone
+      en el Observatorio público.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     ARCHIVO
+================================================== -->
+
+<section id="archivo" class="section">
+
+  <div class="section-heading">
+
+    <div class="eyebrow">
+      Herramientas
+    </div>
+
+    <h2>Archivo</h2>
+
+    <p>
+      Herramientas para conservar y consultar el estado
+      de las confirmaciones.
+    </p>
+
+  </div>
+
+
+  <div class="archive-grid">
+
+
+    <!-- Exportación -->
+
+    <div class="archive-card">
+
+      <div class="eyebrow">
+        Exportación
+      </div>
+
+      <h3>Informe estadístico</h3>
+
+      <p>
+        Descargar una copia de las estadísticas actuales
+        del Observatorio en formato CSV.
+      </p>
+
+      <button
+        class="action-button"
+        onclick="exportCSV()">
+
+        ↓ Exportar estadísticas
+
+      </button>
+
+    </div>
+
+
+    <!-- Actualización -->
+
+    <div class="archive-card">
+
+      <div class="eyebrow">
+        Sincronización
+      </div>
+
+      <h3>Actualizar registro</h3>
+
+      <p>
+        Consultar nuevamente la fuente de datos para obtener
+        las estadísticas más recientes.
+      </p>
+
+      <button
+        class="action-button"
+        onclick="loadData()">
+
+        ↻ Actualizar ahora
+
+      </button>
+
+    </div>
+
+
+  </div>
+
+</section>
+
+
+<!-- ==================================================
+     PIE
+================================================== -->
+
+<footer>
+
+  <div class="footer-symbol">
+    ✧
+  </div>
+
+  <p>
+    Cada estrella cuenta una historia.
+  </p>
+
+  <div class="footer-small">
+    Delfina XV · El Observatorio
+  </div>
+
+</footer>
+
+</div>
+
+
+<!-- ==================================================
+     JAVASCRIPT
+================================================== -->
+
+<script>
+
+/* ================================================
+   CONFIGURACIÓN
+================================================ */
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyB-oVeT_ZHFKbie_4lXm-OcO4D3iisAvNhNTUSdYYSJvUaVy3dam1HeHBfoeMWOXGW/exec";
+
+
+let lastStats = null;
+
+
+/* ================================================
+   NAVEGACIÓN
+================================================ */
+
+function showSection(sectionId, button) {
+
+  document.querySelectorAll(".section")
+    .forEach(section => {
+      section.classList.remove("active");
+    });
+
+  document.querySelectorAll(".nav-button")
+    .forEach(btn => {
+      btn.classList.remove("active");
+    });
+
+  document.getElementById(sectionId)
+    .classList.add("active");
+
+  if (button) {
+    button.classList.add("active");
+  }
+
+}
+
+
+/* ================================================
+   ESTADO DE CONEXIÓN
+================================================ */
+
+function setConnectionState(state, message) {
+
+  const dot = document.getElementById("statusDot");
+  const text = document.getElementById("statusText");
+  const box = document.getElementById("connectionMessage");
+
+  dot.className = "status-dot";
+
+  if (state === "loading") {
+    dot.classList.add("loading");
+    text.textContent = "Consultando el registro...";
+  }
+
+  else if (state === "success") {
+    text.textContent = "Conexión establecida";
+  }
+
+  else if (state === "error") {
+    dot.classList.add("error");
+    text.textContent = "Conexión interrumpida";
+  }
+
+  box.textContent = message;
+
+  box.className = "message-box";
+
+  if (state === "error") {
+    box.classList.add("error");
+  }
+
+  if (state === "success") {
+    box.classList.add("success");
+  }
+
+}
+
+
+/* ================================================
+   CARGAR DATOS
+================================================ */
+
+async function loadData() {
+
+  setConnectionState(
+    "loading",
+    "El Observatorio está consultando el registro de confirmaciones."
+  );
+
+  try {
+
+    const response = await fetch(API_URL, {
+      method: "GET",
+      cache: "no-store"
+    });
+
+    if (!response.ok) {
+      throw new Error("HTTP " + response.status);
+    }
+
+    const data = await response.json();
+
+    if (!data.success || !data.stats) {
+      throw new Error("Respuesta de datos inválida");
+    }
+
+    const stats = data.stats;
+
+    lastStats = stats;
+
+    updateNumber("respuestas", stats.respuestas);
+    updateNumber("confirmados", stats.confirmados);
+    updateNumber("ausentes", stats.ausentes);
+    updateNumber("personas", stats.personasConfirmadas);
+
+    updateTimestamp(data.updated);
+
+    setConnectionState(
+      "success",
+      "Los datos fueron sincronizados correctamente. El Observatorio está actualizado."
+    );
+
+  }
+
+  catch(error) {
+
+    console.error("Observatorio:", error);
+
+    setConnectionState(
+      "error",
+      "No fue posible consultar los datos. Si el problema persiste, puede deberse a la conexión o a restricciones del servicio."
+    );
+
+  }
+
+}
+
+
+/* ================================================
+   ACTUALIZAR NÚMEROS
+================================================ */
+
+function updateNumber(id, value) {
+
+  const element = document.getElementById(id);
+
+  if (value === undefined || value === null) {
+    element.textContent = "—";
+    return;
+  }
+
+  const target = Number(value);
+
+  if (!Number.isFinite(target)) {
+    element.textContent = "—";
+    return;
+  }
+
+  const start = Number(element.textContent) || 0;
+  const duration = 700;
+  const startTime = performance.now();
+
+  function animate(now) {
+
+    const progress = Math.min(
+      (now - startTime) / duration,
+      1
+    );
+
+    const eased = 1 - Math.pow(1 - progress, 3);
+
+    const current =
+      Math.round(start + (target - start) * eased);
+
+    element.textContent =
+      current.toLocaleString("es-AR");
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+
+  }
+
+  requestAnimationFrame(animate);
+
+}
+
+
+/* ================================================
+   FECHA DE ACTUALIZACIÓN
+================================================ */
+
+function updateTimestamp(timestamp) {
+
+  const element = document.getElementById("lastUpdate");
+
+  if (!timestamp) {
+    element.textContent = "Última actualización: —";
+    return;
+  }
+
+  const date = new Date(timestamp);
+
+  if (isNaN(date.getTime())) {
+    element.textContent = "Última actualización: —";
+    return;
+  }
+
+  element.textContent =
+    "Última actualización: " +
+    date.toLocaleString("es-AR", {
+      dateStyle: "short",
+      timeStyle: "short"
+    });
+
+}
+
+
+/* ================================================
+   EXPORTAR CSV
+================================================ */
+
+function exportCSV() {
+
+  if (!lastStats) {
+
+    alert(
+      "Todavía no hay datos disponibles para exportar."
+    );
+
+    return;
+
+  }
+
+  const rows = [
+    ["Indicador", "Valor"],
+    ["Respuestas recibidas", lastStats.respuestas],
+    ["Confirmados", lastStats.confirmados],
+    ["Ausentes", lastStats.ausentes],
+    ["Personas confirmadas", lastStats.personasConfirmadas]
+  ];
+
+  const csv = rows
+    .map(row =>
+      row.map(value =>
+        '"' + String(value).replace(/"/g, '""') + '"'
+      ).join(",")
+    )
+    .join("\n");
+
+  const blob = new Blob(
+    ["\uFEFF" + csv],
+    {
+      type: "text/csv;charset=utf-8;"
+    }
+  );
+
+  const link = document.createElement("a");
+
+  link.href = URL.createObjectURL(blob);
+
+  link.download =
+    "observatorio_delfina_xv_" +
+    new Date().toISOString().slice(0,10) +
+    ".csv";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  document.body.removeChild(link);
+
+  URL.revokeObjectURL(link.href);
+
+}
+
+
+/* ================================================
+   INICIO
+================================================ */
+
+loadData();
+
+/* Actualización automática cada 30 segundos */
+
+setInterval(loadData, 30000);
+
+</script>
+
+</body>
+</html>
